@@ -1,0 +1,4 @@
+gensim
+mediawiki-dump
+pandas
+pyarrow
