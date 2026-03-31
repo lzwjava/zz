@@ -1,0 +1,50 @@
+Starting shards 5-20
+=== 000_00005.parquet ===
+Downloaded: 2049 MB
+Shard done. New docs: 1,086,392
+=== 000_00006.parquet ===
+Downloaded: 2048 MB
+Shard done. New docs: 2,177,792
+=== 000_00007.parquet ===
+Downloaded: 2048 MB
+Shard done. New docs: 3,263,203
+=== 000_00008.parquet ===
+Downloaded: 2048 MB
+Shard done. New docs: 4,351,603
+=== 000_00009.parquet ===
+Downloaded: 2048 MB
+Shard done. New docs: 5,440,009
+=== 000_00010.parquet ===
+Downloaded: 2048 MB
+Shard done. New docs: 6,526,410
+=== 000_00011.parquet ===
+Downloaded: 2047 MB
+Shard done. New docs: 7,613,765
+=== 000_00012.parquet ===
+Downloaded: 2048 MB
+Shard done. New docs: 8,700,128
+=== 000_00013.parquet ===
+Downloaded: 2048 MB
+Shard done. New docs: 9,785,539
+=== 000_00014.parquet ===
+Downloaded: 2048 MB
+Shard done. New docs: 10,871,875
+=== 000_00015.parquet ===
+Downloaded: 2048 MB
+Shard done. New docs: 11,958,210
+=== 000_00016.parquet ===
+Downloaded: 2049 MB
+Shard done. New docs: 13,041,639
+=== 000_00017.parquet ===
+Downloaded: 2047 MB
+Shard done. New docs: 14,125,947
+=== 000_00018.parquet ===
+Downloaded: 2048 MB
+Shard done. New docs: 15,215,290
+=== 000_00019.parquet ===
+Downloaded: 2049 MB
+Shard done. New docs: 16,300,691
+=== 000_00020.parquet ===
+Downloaded: 2047 MB
+Shard done. New docs: 17,387,102
+ALL DONE. Total new docs: 17,387,102
