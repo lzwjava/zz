@@ -23,6 +23,8 @@ data/
 wiki_train/
 fineweb_test_dump/
 *_dump/
+datasets/*
+!datasets/dummy.txt
 
 # IDE
 .vscode/
