@@ -8,31 +8,44 @@ Dataset processing and training utilities for machine learning projects.
 pip install -r requirements.txt
 ```
 
-## Scripts
+## Directory Structure
 
-### Dataset Download & Extraction
-
-- `download_fineweb.py` - Download FineWeb dataset with streaming support
-- `download_and_extract.py` - Download and extract FineWeb using pyarrow
-- `extract_parquet.py` - Extract data from parquet files
-
-### Training Utilities
-
-- `train/calculate_duration.py` - Calculate training duration from logs
-- `train/evaluate.py` - Model evaluation
-- `train/extract_wiki.py` - Extract Wikipedia corpus
-- `train/extract_wiki_corpus.py` - Process Wikipedia data
-- `train/extract_fineweb.py` - Extract FineWeb data
-- `train/rename_fineweb.py` - Rename FineWeb files
+```
+scripts/
+  download/   # Dataset download scripts
+  extract/    # Data extraction scripts
+  analysis/   # Training analysis and evaluation
+logs/         # Training logs and outputs
+```
 
 ## Usage
 
-Download FineWeb dataset:
+### Download Datasets
+
 ```bash
-python download_fineweb.py --limit 1000 --output output.txt
+# Download FineWeb dataset
+python scripts/download/download_fineweb.py --limit 1000 --output output.txt
+
+# Download with wget scripts
+bash scripts/download/wget_fineweb_1.sh
 ```
 
-Calculate training duration:
+### Extract Data
+
 ```bash
-python train/calculate_duration.py
+# Extract from parquet files
+python scripts/extract/extract_parquet.py
+
+# Extract FineWeb data
+python scripts/extract/extract_fineweb.py
+```
+
+### Analysis
+
+```bash
+# Calculate training duration
+python scripts/analysis/calculate_duration.py
+
+# Evaluate training metrics
+python scripts/analysis/evaluate.py --file logs/train_log_openweb.txt
 ```

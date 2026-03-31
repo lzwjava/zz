@@ -1,0 +1,40 @@
+# Data files
+*.txt
+!requirements.txt
+*.parquet
+*.bz2
+*.xml
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+
+# Logs
+logs/*.txt
+logs/*.log
+
+# Data directories
+data/
+wiki_train/
+fineweb_test_dump/
+*_dump/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Training outputs
+*.png
+*.pdf
+training_metrics.*
