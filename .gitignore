@@ -1,6 +1,7 @@
 # Data files
 *.txt
 !requirements.txt
+!logs/*.txt
 *.parquet
 *.bz2
 *.xml
@@ -15,7 +16,6 @@ env/
 venv/
 
 # Logs
-logs/*.txt
 logs/*.log
 
 # Data directories
