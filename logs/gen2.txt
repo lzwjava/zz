@@ -1,0 +1,38 @@
+root@ml-ai-ubuntu-gpu-h200x1-141gb-nyc2:~/nanoGPT# python3 sample.py --out_dir=out-fineweb1_5b --start="what's css selector?" --num_samples=3 --max_new_tokens=200
+Overriding: out_dir = out-fineweb1_5b
+Overriding: start = what's css selector?
+Overriding: num_samples = 3
+Overriding: max_new_tokens = 200
+number of parameters: 1555.20M
+No meta.pkl found, assuming GPT-2 encodings...
+what's css selector?
+|0||0||0||0||0||0||1||0||0||0||0||0||0||0||0||0||0||0||0||0||0||0||0||0||0||0||0||0||0||0||0||0||0||0||0||0||0||0||0||0||0||0||0||0||0||0||0||0||0||0||0||0||0||0||0||0||0||0||0||4||0||0||0||0||0||0||0||0||0||0||0||0||0||0||0||0||0||0||0||0||0||0||0||0||0||0||0||0||0||0||0||0||4||0||0||0||0|| 0|
+|
+---------------
+what's css selector?
+Other questions:
+|Add a new product|
+<|endoftext|>
+|Innovation:||The idea behind this topic is now in the making sense.|
+|Name:||The issue of 'The Huddam' or 'Cyrus'
+|Date:||16 April 2008 00:00|
+|Subject:||The history of Huddam's syndrome is a disease on the part of life.
+Here are some items of Huddam's syndrome:
+(1) The Huddam's syndrome is the most common and dangerous in common and caused by the Huddam's syndrome.
+2) The Huddam's syndrome is the most common symptom of Huddam with the B.S. blood.
+5) The Huddam's syndrome is a disease of many people.
+6. The Huddam, Huddam's syndrome is a disease that causes its onset of this disease.
+6
+---------------
+what's css selector? Thanks, and thanks for remembering why you said that you didn't make it.
+"That message is now an example of the message that you got a little bit more interesting. Your fingers and your fingers are so good! Your eyes are so good! Good stuff is now available!"
+"When you think about a lot of things, I don't say I was in a small room. I'm just in the living room - it's all around."
+"I'm sorry if I'm in the hospital and you are right now."
+"I think I can't make it any worse."
+"I might be in there too. She's not good anymore."
+"Ah, what?"
+"What?" "Yes, I don't have a moment of a moment to go."
+"So, I'm sorry, look yourself in a place that looks like a bit different."
+"I'm sorry. I'm not sorry, but you are my best."
+"
+---------------
