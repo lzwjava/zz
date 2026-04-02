@@ -1,0 +1,29 @@
+compiling the model... (takes a ~minute)
+step 0: train loss 11.0550, val loss 11.0560
+iter 0: loss 11.0542, time 69077.89ms, mfu -100.00%
+
+iter 50: loss 7.6273, time 21079.81ms, mfu 163.82%
+iter 100: loss 6.6285, time 21130.24ms, mfu 163.78%
+iter 150: loss 6.2150, time 21128.33ms, mfu 163.74%
+iter 200: loss 6.0960, time 21138.39ms, mfu 163.71%
+step 250: train loss 5.9251, val loss 5.9285
+saving checkpoint to out-fineweb1_5b
+iter 250: loss 5.9339, time 84649.09ms, mfu 151.41%
+iter 300: loss 5.8692, time 21133.39ms, mfu 152.61%
+iter 350: loss 5.6391, time 21129.15ms, mfu 153.70%
+iter 400: loss 5.4833, time 21147.22ms, mfu 154.66%
+iter 450: loss 5.2654, time 21136.51ms, mfu 155.53%
+step 500: train loss 5.0703, val loss 5.0614
+saving checkpoint to out-fineweb1_5b
+iter 500: loss 5.1716, time 88406.81ms, mfu 143.88%
+iter 550: loss 4.8484, time 21173.35ms, mfu 145.80%
+iter 600: loss 4.9086, time 21180.40ms, mfu 147.53%
+iter 650: loss 4.4300, time 21158.29ms, mfu 149.09%
+iter 700: loss 4.4124, time 21166.90ms, mfu 150.50%
+step 750: train loss 4.2375, val loss 4.2237
+saving checkpoint to out-fineweb1_5b
+iter 750: loss 4.2598, time 88904.10ms, mfu 139.33%
+iter 800: loss 4.3493, time 21200.03ms, mfu 141.69%
+iter 850: loss 4.0713, time 21200.99ms, mfu 143.81%
+iter 900: loss 4.1093, time 21197.82ms, mfu 145.72%
+iter 950: loss 4.0026, time 21205.84ms, mfu 147.43%
