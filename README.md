@@ -18,6 +18,14 @@ scripts/
 logs/         # Training logs and outputs
 ```
 
+## Pending Features
+
+- **RAG (Retrieval-Augmented Generation)** — local knowledge base Q&A using vector search over your own documents
+- **Knowledge Base Management** — ingest PDFs, text files, and other documents into a vector store (e.g. FAISS)
+- **LLM Integration** — connect local or API-based models for document-grounded answers
+- **Agent Support** — tool-calling agents that can query knowledge bases and external APIs
+- **Web UI** — chat interface for interacting with the knowledge base
+
 ## Usage
 
 ### Download Datasets
