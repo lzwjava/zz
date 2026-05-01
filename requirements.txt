@@ -2,3 +2,5 @@ gensim
 mediawiki-dump
 pandas
 pyarrow
+huggingface_hub
+datasets
