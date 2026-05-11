@@ -10,20 +10,21 @@ Resumable: state is tracked in <output-dir>/progress.json. Cancel any time
 with Ctrl-C; re-running skips done shards and resumes the in-progress one
 from its .part file via HTTP Range.
 
-Usage:
-  # Plan only, no bytes pulled
-  python plan_and_download_fineweb_gpt3.py --plan
+Run from the repo root (~/projects/zz), not from this script's directory —
+the default --output-dir is a relative path (datasets/fineweb-edu).
 
+Usage:
   # Download (or resume) into datasets/fineweb-edu
-  python plan_and_download_fineweb_gpt3.py
+  python scripts/download/plan_and_download_fineweb_gpt3.py
 
   # Force re-listing shards from the Hub (refresh progress.json plan)
-  python plan_and_download_fineweb_gpt3.py --refresh-plan
+  python scripts/download/plan_and_download_fineweb_gpt3.py --refresh-plan
 """
 
 import argparse
 import json
 import os
+import subprocess
 import sys
 import time
 import urllib.request
@@ -38,6 +39,70 @@ REPO_ID = "HuggingFaceFW/fineweb-edu"
 TARGET_TOKENS = 100_000_000_000
 BYTES_PER_TOKEN = 4.0
 PROGRESS_FILE = "progress.json"
+PROXY_ENV_VARS = (
+    "http_proxy",
+    "https_proxy",
+    "HTTP_PROXY",
+    "HTTPS_PROXY",
+    "all_proxy",
+    "ALL_PROXY",
+)
+
+
+def warn_if_proxy_set() -> None:
+    """hf-mirror.com is unblocked in China — routing 400 GB through a local
+    proxy (Clash/V2Ray on :7890 etc.) is slow and pointless. Warn loudly."""
+    set_vars = {v: os.environ[v] for v in PROXY_ENV_VARS if os.environ.get(v)}
+    if not set_vars:
+        return
+
+    print("\n!!! WARNING: proxy environment variable(s) detected:", file=sys.stderr)
+    for k, v in set_vars.items():
+        print(f"      {k}={v}", file=sys.stderr)
+    print(
+        "    hf-mirror.com does not need a proxy from China — 400 GB "
+        "through localhost:7890 will be slow.",
+        file=sys.stderr,
+    )
+    print(
+        f"    To unset for this shell: unset {' '.join(set_vars.keys())}",
+        file=sys.stderr,
+    )
+
+    print("    Testing proxy by curling google.com (5s timeout)...", file=sys.stderr)
+    try:
+        r = subprocess.run(
+            [
+                "curl",
+                "-sS",
+                "-o",
+                "/dev/null",
+                "-w",
+                "%{http_code}",
+                "-m",
+                "5",
+                "https://www.google.com",
+            ],
+            capture_output=True,
+            text=True,
+            timeout=10,
+        )
+        code = r.stdout.strip() or "?"
+        if code == "200":
+            print(
+                f"      google.com -> HTTP {code}: proxy works, but unneeded here.",
+                file=sys.stderr,
+            )
+        else:
+            print(
+                f"      google.com -> HTTP {code}: proxy may be broken — definitely unset it.",
+                file=sys.stderr,
+            )
+    except FileNotFoundError:
+        print("      curl not installed; skipping connectivity test.", file=sys.stderr)
+    except Exception as e:
+        print(f"      curl test failed: {e}", file=sys.stderr)
+    print("", file=sys.stderr)
 
 
 def human_bytes(n: int) -> str:
@@ -186,22 +251,16 @@ def main():
     )
     p.add_argument("--output-dir", default="datasets/fineweb-edu")
     p.add_argument(
-        "--plan", action="store_true", help="Print plan and exit without downloading"
-    )
-    p.add_argument(
         "--refresh-plan",
         action="store_true",
         help="Re-list shards from the Hub and overwrite progress.json plan",
     )
     args = p.parse_args()
 
+    warn_if_proxy_set()
     state = build_or_load_state(args.output_dir, args.refresh_plan)
     progress_path = os.path.join(args.output_dir, PROGRESS_FILE)
     print_plan_summary(state)
-
-    if args.plan:
-        print("\n--plan set; exiting without downloading.")
-        return
 
     print(f"\nDownloading to {args.output_dir} via {BASE_URL} ...", flush=True)
     shards = state["shards"]
