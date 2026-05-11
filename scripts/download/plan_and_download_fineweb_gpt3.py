@@ -4,12 +4,14 @@
 Hardcoded plan: ~200 shards, ~400 GB on disk, ~100B tokens
 (English BPE, ~4 bytes/token, FineWeb shards ~2.1 GB).
 
+Uses hf-mirror.com (China-friendly, no VPN required).
+
 Usage:
   # Plan only, no bytes pulled
   python plan_and_download_fineweb_gpt3.py --plan
 
-  # Download from the HF mirror (faster from Asia) into datasets/fineweb-edu
-  python plan_and_download_fineweb_gpt3.py --mirror hf-mirror
+  # Download into datasets/fineweb-edu
+  python plan_and_download_fineweb_gpt3.py
 """
 
 import argparse
@@ -19,16 +21,14 @@ import time
 import urllib.request
 from typing import List
 
-from huggingface_hub import HfApi
+BASE_URL = "https://hf-mirror.com"
+os.environ.setdefault("HF_ENDPOINT", BASE_URL)
+
+from huggingface_hub import HfApi  # noqa: E402
 
 REPO_ID = "HuggingFaceFW/fineweb-edu"
 TARGET_TOKENS = 100_000_000_000
 BYTES_PER_TOKEN = 4.0
-
-MIRRORS = {
-    "huggingface": "https://huggingface.co",
-    "hf-mirror": "https://hf-mirror.com",
-}
 
 
 def human_bytes(n: int) -> str:
@@ -100,13 +100,11 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter, description=__doc__
     )
     p.add_argument("--output-dir", default="datasets/fineweb-edu")
-    p.add_argument("--mirror", choices=list(MIRRORS), default="huggingface")
     p.add_argument(
         "--plan", action="store_true", help="Print plan and exit without downloading"
     )
     args = p.parse_args()
 
-    base_url = MIRRORS[args.mirror]
     target_bytes = int(TARGET_TOKENS * BYTES_PER_TOKEN)
 
     print(f"Listing shards in {REPO_ID}...", flush=True)
@@ -144,12 +142,12 @@ def main():
         print("\n--plan set; exiting without downloading.")
         return
 
-    print(f"\nDownloading to {args.output_dir} via {base_url} ...", flush=True)
+    print(f"\nDownloading to {args.output_dir} via {BASE_URL} ...", flush=True)
     os.makedirs(args.output_dir, exist_ok=True)
     done_bytes = 0
     t0 = time.time()
     for i, sh in enumerate(selected, 1):
-        url = f"{base_url}/datasets/{REPO_ID}/resolve/main/{sh['path']}?download=true"
+        url = f"{BASE_URL}/datasets/{REPO_ID}/resolve/main/{sh['path']}?download=true"
         dest = os.path.join(args.output_dir, sh["path"].replace("/", "__"))
         if os.path.exists(dest) and os.path.getsize(dest) > 0:
             size = os.path.getsize(dest)
