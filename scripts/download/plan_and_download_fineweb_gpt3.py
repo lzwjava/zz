@@ -96,12 +96,14 @@ def download_one(url: str, dest: str, retries: int = 3) -> int:
 
 
 def main():
-    p = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter,
-                                description=__doc__)
+    p = argparse.ArgumentParser(
+        formatter_class=argparse.RawDescriptionHelpFormatter, description=__doc__
+    )
     p.add_argument("--output-dir", default="datasets/fineweb-edu")
     p.add_argument("--mirror", choices=list(MIRRORS), default="huggingface")
-    p.add_argument("--plan", action="store_true",
-                   help="Print plan and exit without downloading")
+    p.add_argument(
+        "--plan", action="store_true", help="Print plan and exit without downloading"
+    )
     args = p.parse_args()
 
     base_url = MIRRORS[args.mirror]
@@ -114,21 +116,29 @@ def main():
         sys.exit(1)
 
     total_bytes = sum(s["size"] for s in shards)
-    print(f"  available: {len(shards)} shards, {human_bytes(total_bytes)}, "
-          f"~{int(total_bytes / BYTES_PER_TOKEN):,} tokens", flush=True)
+    print(
+        f"  available: {len(shards)} shards, {human_bytes(total_bytes)}, "
+        f"~{int(total_bytes / BYTES_PER_TOKEN):,} tokens",
+        flush=True,
+    )
 
     selected = select_shards(shards, target_bytes)
     selected_bytes = sum(s["size"] for s in selected)
     est_tokens = int(selected_bytes / BYTES_PER_TOKEN)
-    print(f"\nPlan to hit ~{TARGET_TOKENS:,} tokens "
-          f"@ {BYTES_PER_TOKEN} bytes/token (small-scale GPT-3 ablation):", flush=True)
+    print(
+        f"\nPlan to hit ~{TARGET_TOKENS:,} tokens "
+        f"@ {BYTES_PER_TOKEN} bytes/token (small-scale GPT-3 ablation):",
+        flush=True,
+    )
     print(f"  shards:        {len(selected)}", flush=True)
     print(f"  download size: {human_bytes(selected_bytes)}", flush=True)
     print(f"  est. tokens:   {est_tokens:,}", flush=True)
     dumps = sorted({s["dump"] for s in selected})
-    print(f"  dumps covered: {len(dumps)}"
-          + (f" ({dumps[0]} .. {dumps[-1]})" if len(dumps) > 1 else f" ({dumps[0]})"),
-          flush=True)
+    print(
+        f"  dumps covered: {len(dumps)}"
+        + (f" ({dumps[0]} .. {dumps[-1]})" if len(dumps) > 1 else f" ({dumps[0]})"),
+        flush=True,
+    )
 
     if args.plan:
         print("\n--plan set; exiting without downloading.")
@@ -143,22 +153,36 @@ def main():
         dest = os.path.join(args.output_dir, sh["path"].replace("/", "__"))
         if os.path.exists(dest) and os.path.getsize(dest) > 0:
             size = os.path.getsize(dest)
-            print(f"  [{i}/{len(selected)}] cached {sh['path']} ({human_bytes(size)})",
-                  flush=True)
+            print(
+                f"  [{i}/{len(selected)}] cached {sh['path']} ({human_bytes(size)})",
+                flush=True,
+            )
         else:
-            print(f"  [{i}/{len(selected)}] {sh['path']} "
-                  f"({human_bytes(sh['size'])})", flush=True)
+            print(
+                f"  [{i}/{len(selected)}] {sh['path']} ({human_bytes(sh['size'])})",
+                flush=True,
+            )
             size = download_one(url, dest)
         done_bytes += size
         elapsed = max(time.time() - t0, 1e-3)
         rate = done_bytes / elapsed / 1024 / 1024
-        eta = (selected_bytes - done_bytes) / max(done_bytes / elapsed, 1) if done_bytes else 0
-        print(f"      progress: {human_bytes(done_bytes)} / "
-              f"{human_bytes(selected_bytes)}  "
-              f"{rate:.1f} MB/s  ETA {eta/60:.1f} min", flush=True)
+        eta = (
+            (selected_bytes - done_bytes) / max(done_bytes / elapsed, 1)
+            if done_bytes
+            else 0
+        )
+        print(
+            f"      progress: {human_bytes(done_bytes)} / "
+            f"{human_bytes(selected_bytes)}  "
+            f"{rate:.1f} MB/s  ETA {eta / 60:.1f} min",
+            flush=True,
+        )
 
-    print(f"\nDone. {len(selected)} shards, {human_bytes(done_bytes)} on disk, "
-          f"~{int(done_bytes / BYTES_PER_TOKEN):,} tokens.", flush=True)
+    print(
+        f"\nDone. {len(selected)} shards, {human_bytes(done_bytes)} on disk, "
+        f"~{int(done_bytes / BYTES_PER_TOKEN):,} tokens.",
+        flush=True,
+    )
 
 
 if __name__ == "__main__":

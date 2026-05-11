@@ -8,17 +8,18 @@ from datasets import load_dataset
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--limit", type=int, default=None, help="Max documents to download")
-parser.add_argument("--output", type=str, default="fineweb_extracted_all.txt", help="Output file")
-parser.add_argument("--subset", type=str, default="sample-10BT", help="FineWeb subset name")
+parser.add_argument(
+    "--output", type=str, default="fineweb_extracted_all.txt", help="Output file"
+)
+parser.add_argument(
+    "--subset", type=str, default="sample-10BT", help="FineWeb subset name"
+)
 args = parser.parse_args()
 
 total_docs = 0
 
 dataset = load_dataset(
-    "HuggingFaceFW/fineweb",
-    name=args.subset,
-    split="train",
-    streaming=True
+    "HuggingFaceFW/fineweb", name=args.subset, split="train", streaming=True
 )
 
 with open(args.output, "w", encoding="utf-8") as f:

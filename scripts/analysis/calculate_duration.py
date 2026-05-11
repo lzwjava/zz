@@ -15,7 +15,6 @@ def calculate_training_duration(log_file):
             # Format: iter X: loss Y, time Zms, mfu W%
             match = re.search(r"iter (\d+): loss [\d.]+, time ([\d.]+)ms", line)
             if match:
-                iteration = int(match.group(1))
                 time_ms = float(match.group(2))
                 total_time_ms += time_ms
                 iteration_count += 1
