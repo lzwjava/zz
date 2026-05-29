@@ -7,9 +7,13 @@ Adapted from plan_and_download_fineweb_gpt3.py for non-China environments:
   - Smaller default (--tokens) to leave room on disk
   - Resumable via progress.json (same logic)
 
+Run from the repo root (cd ~/zz), not from this script's directory —
+the default --output-dir is a relative path (datasets/fineweb-edu).
+
 Usage:
   # Default: ~10B tokens (~40 GB) — safe on 571 GB free
-  python scripts/download/plan_and_download_fineweb_gpt3_amd.py
+  cd ~/zz
+  python3 scripts/download/plan_and_download_fineweb_gpt3_amd.py
 
   # Custom amount
   python scripts/download/plan_and_download_fineweb_gpt3_amd.py --tokens 50000000000
