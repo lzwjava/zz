@@ -1,0 +1,20 @@
+
+=== NANOCCHAT TRAINING SUMMARY ===
+Date: 2026-06-04 to 2026-06-06
+Run: rtx4070-d12-chinchilla (resumed from fineweb-edu-d12 at step 10k)
+Model: 286M params, depth=12, n_embd=768, n_head=6, seq=2048, window=L
+GPU: RTX 4070 12GB, bf16, ~55,670 tok/sec
+Total steps: 87,000 | Total time: 1,706 min (28.4h)
+Final val bpb: 0.865752 | Min val bpb: 0.865752
+Final smooth train loss: 2.748
+
+Loss progression (from checkpoint metadata):
+Step  10000: val_bpb=0.934896, smooth_loss=2.979383, time=196.0min
+Step  20000: val_bpb=1.015537, smooth_loss=3.271478, time=392.2min
+Step  30000: val_bpb=1.001921, smooth_loss=3.234340, time=588.4min
+Step  40000: val_bpb=0.977976, smooth_loss=3.136102, time=784.7min
+Step  50000: val_bpb=0.953344, smooth_loss=3.042346, time=980.6min
+Step  60000: val_bpb=0.929888, smooth_loss=2.954205, time=1176.4min
+Step  70000: val_bpb=0.902207, smooth_loss=2.884987, time=1372.6min
+Step  80000: val_bpb=0.879920, smooth_loss=2.850462, time=1568.8min
+Step  87000: val_bpb=0.865752, smooth_loss=2.748422, time=1706.2min

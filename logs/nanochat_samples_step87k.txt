@@ -1,0 +1,49 @@
+Model: d12, step=87000, device=cuda
+Temperature=0.8, top_k=50, max_tokens=80
+============================================================
+
+--- The capital of France is ---
+<|bos|>The capital of France is Paris. There are 304,239 inhabitants and the territory of the city includes the following 14 departments of which 12 are territorial:
+- Sardinia (the province of Sardinia is divided into 5 territory with the same name)
+- Corsica (the province of Corsica is divided into 10 territory with the same name)
+- Corsica (the
+
+--- Once upon a time ---
+<|bos|>Once upon a time, there was a woman named Gloula. She was the beautiful daughter of a wealthy merchant named Lydia. Gloula had a daughter, Tzara, who was born to her mother, but had a hard time passing over the world. She was very poor and had to work long hours for a living. She was very poor and had to work at home. She had children who
+
+--- The meaning of life is ---
+<|bos|>The meaning of life is very complex. It includes physical and mental activity, emotions, relationships, a desire to achieve, feelings and behaviors, relationships, and a sense of purpose. People make decisions about their lives, and many of those decisions are based on actions taken in the past. This process of making decisions is called self-awareness. Self-awareness is what gives us the ability to distinguish our own actions from those of
+
+--- In 2025, artificial intelligence ---
+<|bos|>In 2025, artificial intelligence will be at the core of everything we do. From the Internet to communications with the rest of the world, we’re going to have a far more complicated way of doing things. Artificial intelligence is now more of a science than it was five years ago. It’s been around for a long time; in fact, it’s been around for almost as long as the Web.
+With the Internet the most
+
+--- The recipe for chocolate cake requires ---
+<|bos|>The recipe for chocolate cake requires a lot of ingredients, but that doesn't mean it's impossible. Even in the past, many recipes call for the use of chocolate. But chocolate is very expensive, and the more you use, the higher the cost. In modern, high-quality chocolate, the average price is about $1-$2 per pound.
+Chocolate is very versatile, and in any recipe, you can vary your
+
+--- def fibonacci(n): ---
+<|bos|>def fibonacci(n): A mathematical relation between the area of a number and the area of a cylinder with a given radius; it is the most commonly used formula for determining area of objects such as the area of a circle.
+def Fibonacci(n): Any number between 0 and 1 that is an integer; 1 is the sum of the two first integers.
+def Fibonacci(n): An integer
+
+--- The theory of relativity states that ---
+<|bos|>The theory of relativity states that the speed of light in a vacuum is cp = c2 × 6 × 103 = 186,000 km/second. Einstein's theory of relativity can be summarized in these two lines:
+The second line has been extended to include the equations of general relativity, which has a special name in physics called the equivalence principle. In general relativity, the equivalence principle is
+
+--- import torch ---
+<|bos|>import torch, torch, torch
+From Wikimedia Commons, the free media repository
+In the past, in many European countries, torches were used as an ornamental
+approach to a burning building. These torches were often made of plastic. The
+surface of the plastic was covered with a protective cloth to protect the torches
+from the elements. The cloth of the cloth was usually decorated with
+
+--- The quick brown fox ---
+<|bos|>The quick brown fox is a brown fox, often described as a kind of fox, except that fox is more technically classified as a fox and the fox is a kind of fox, because fox is a kind of fox, while brown fox is a kind of fox. This is a very broad definition of the fox, however. As a kind of fox, fox is a kind of fox, which is a kind of fox
+
+--- Machine learning is ---
+<|bos|>Machine learning is a field of study in which researchers apply learning theory to the design, development, and application of machines, systems, and methods. The field has a diverse and interdisciplinary structure, with practitioners in the various fields ranging from computer science, applied mechanics, mathematics, and engineering, to computer science, information management, communications, and information technology. As one of the most exciting areas of research in computer science and
+
+============================================================
+Done.
