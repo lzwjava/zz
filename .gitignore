@@ -48,3 +48,5 @@ training_metrics.*
 finetune/lzw-notes-lora/
 finetune/lzw-notes-merged/
 finetune/lzw-notes-gguf/
+
+unsloth_compiled_cache

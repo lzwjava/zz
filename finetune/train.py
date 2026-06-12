@@ -21,7 +21,7 @@ DIR = Path(__file__).parent
 
 def parse_args():
     p = argparse.ArgumentParser()
-    p.add_argument("--model", default="unsloth/Qwen3-8B", help="Model name or path")
+    p.add_argument("--model", default="/home/lzw/.cache/huggingface/hub/models--unsloth--Qwen3-4B-unsloth-bnb-4bit/snapshots/main", help="Model name or path")
     p.add_argument("--data", default=str(DIR / "notes_sft_train.jsonl"))
     p.add_argument("--eval-data", default=str(DIR / "notes_sft_eval.jsonl"))
     p.add_argument("--output", default=str(DIR / "lzw-notes-lora"))
