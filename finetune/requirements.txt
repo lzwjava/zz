@@ -1,0 +1,8 @@
+python-frontmatter
+tiktoken
+unsloth
+datasets
+trl
+peft
+transformers
+accelerate
