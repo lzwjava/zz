@@ -50,3 +50,6 @@ finetune/lzw-notes-merged/
 finetune/lzw-notes-gguf/
 
 unsloth_compiled_cache
+
+finetune/lzw-notes-merged
+*.gguf
