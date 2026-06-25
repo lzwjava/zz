@@ -111,19 +111,32 @@ def cmd_list(files):
 
 def cmd_sample(files, n, text_only, meta_only, chars):
     """Show n random samples across all shards."""
-    for _ in range(n):
+    shown = 0
+    attempts = 0
+    max_attempts = n * 5
+    while shown < n and attempts < max_attempts:
+        attempts += 1
         f = random.choice(files)
         rel = os.path.relpath(f, DATA_DIR)
-        df = pd.read_parquet(f)
+        try:
+            df = pd.read_parquet(f)
+        except Exception as e:
+            print(f"  WARN: skipping corrupt shard {rel}: {e}")
+            continue
         idx = random.randint(0, len(df) - 1)
         print(f"\n  From shard: {rel}  (row {idx}/{len(df)})")
         print_filing(df.iloc[idx], idx=idx, text_only=text_only, meta_only=meta_only, chars=chars)
+        shown += 1
 
 
 def cmd_head(file_path, n, text_only, meta_only, chars):
     """Show first n rows of a specific file."""
     rel = os.path.relpath(file_path, DATA_DIR)
-    df = pd.read_parquet(file_path)
+    try:
+        df = pd.read_parquet(file_path)
+    except Exception as e:
+        print(f"  ERROR: corrupt shard {rel}: {e}")
+        return
     print(f"\n  Shard: {rel}  ({len(df)} rows total, showing first {n})")
     for i in range(min(n, len(df))):
         print_filing(df.iloc[i], idx=i, text_only=text_only, meta_only=meta_only, chars=chars)
@@ -136,9 +149,13 @@ def cmd_search(files, keyword, text_only, meta_only, chars):
     print(f"\n  Searching for '{keyword}' across {len(files)} shards...")
     for f in files:
         rel = os.path.relpath(f, DATA_DIR)
-        df = pd.read_parquet(f, columns=["text", "metadata_accession-number",
-                                          "metadata_filing-date", "metadata_filer",
-                                          "metadata_period", "content"])
+        try:
+            df = pd.read_parquet(f, columns=["text", "metadata_accession-number",
+                                              "metadata_filing-date", "metadata_filer",
+                                              "metadata_period", "content"])
+        except Exception as e:
+            print(f"  WARN: skipping corrupt shard {rel}: {e}")
+            continue
         matches = df[df["text"].str.lower().str.contains(keyword_lower, na=False)]
         if len(matches) > 0:
             print(f"\n  Shard: {rel}  — {len(matches)} matches")
