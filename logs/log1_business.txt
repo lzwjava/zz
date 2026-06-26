@@ -1,0 +1,113 @@
+Overriding: out_dir = out-sec-edgar-124m
+Overriding: start = FILE:/mnt/data/zz/prompt1_business.txt
+Overriding: num_samples = 1
+Overriding: max_new_tokens = 1200
+Overriding: temperature = 0.7
+number of parameters: 123.59M
+No meta.pkl found, assuming GPT-2 encodings...
+ITEM 1. BUSINESS
+
+Overview
+
+We are a leading provider of cloud-based enterprise software solutions for the healthcare industry. Our platform enables hospitals, clinics, and other healthcare organizations to streamline their operations, improve patient outcomes, and reduce costs. We serve over 2,500 customers across 48 states, including 18 of the top 25 hospital systems in the United States.
+
+Our solutions address critical challenges in healthcare delivery, including electronic health records (EHR), practice management, revenue cycle management, and population health analytics. Our AI-powered clinical decision support tools help physicians make better-informed treatment decisions, while our interoperability platform enables seamless data exchange between disparate healthcare systems.
+
+For the fiscal year ended December 31, 2023, we generated revenue of approximately $487.2 million, representing a 28% increase from the prior year. Our subscription revenue, which accounted for 78% of total revenue, grew 35% year-over-year. We had approximately 8,200 full-time employees as of December 31, 2023.
+Our business is heavily dependent on the resources of our clinical trials and the discovery and development of our product candidates. Our technology costs are based on the materials, manufacturing, test, and customer support costs. Our technology and other costs are subject to various regulatory requirements and include filing fees, licensing and filing fees and other costs.
+We are a global leader in the healthcare industry, and the care industry is undergoing a number of product development, including the following:
+●
+Our core product development, product development and commercialization of our product candidates, which we currently license agreements with third-party manufacturers. We also license and research and development activities, including computer-based and electronic testing services, to enhance the diagnostic, medical, manufacturing, process, manufacturing, process, and commercialization of our product candidates, as well as our licensing of our products, as well as our products and services, as well as our sales, marketing and distribution. Our primary end-party products allow hospitals to create, manufacture, test and support, process, and develop commercializing our product candidates.
+●
+Our new product development, research and development, manufacturing, and distribution capabilities, which directly include:
+●
+Our commercialization and development, including the following:
+●
+Our development of new product candidates, including the following:
+●
+the expansion of new product candidates, including our product candidates and the existing products, including new product candidates, and our existing product candidates;
+●
+the recruitment of new product candidates, including the following:
+●
+Our commercialization of new product candidates and new product candidates, including the following:
+●
+Our commercialization of new product candidates, including the following:
+●
+our existing product candidates with new product candidates and the timing of commercialization of new products, including the following:
+●
+Our commercialization of new product candidates, including the following:
+●
+Our commercialization and commercialization of our product candidates, including the following:
+●
+Our commercialization of new product candidates, including the following:
+●
+Our commercialization of our product candidates, including the following:
+●
+Our commercialization of new product candidates, including the following:
+●
+Our Current infrastructure to target products, including AT-generation and to an additional product candidates, including the following:
+●
+Our commercialization of X-Avent therapies, including the following:
+●
+Our commercialization of X-Avent therapies, including the U.S.
+●
+Our commercialization of existing product candidates, including the following:
+●
+our commercialization of X-Zentib, including the following:
+●
+Our commercialization of X-Zentib, including the following:
+●
+Our commercialization of X-Zentib, including the following:
+●
+our commercialization of Q- partnerib, including the following:
+●
+Our commercialization of X-Zentib, or the following:
+●
+Our commercialization of X-Zentib, including the following:
+●
+Our commercialization of X-Zentib, including the following:
+●
+Capitalizing our X-Zentib, including the following:
+●
+Our commercialization of X-Zentib, including the following:
+●
+Our commercialization of X-Zentib, including the following:
+●
+Our commercialization of our X-Zentib, if approved by X-Zentib, including the following:
+●
+We have incurred significant revenue and will have to incur significant losses in the foreseeable future. We expect to continue to incur significant losses in the foreseeable future.
+●
+Our current and anticipated product development and commercialization of X-Zentib, including the following:
+●
+Our current and future product development and commercialization of our product candidates, including our product candidates, are currently in the development of X-Zentib, including X-Zentib, the following:
+●
+the development of X-Zentib, and the potential future product candidate (including the following:
+●
+Our commercialization of X-Zentib, including S-Zentib, or the co;
+●
+Our commercialization of X-Zentib, including the following:
+●
+Our commercialization of X-Zentib, including the following:
+●
+our preclinical and clinical development of X-Zentib, including the following:
+●
+our ability to expand the development of X-Zentib, including any future product candidates;
+●
+the ability to develop and commercialize X-Zentib, including our third-party manufacturers, to develop and commercialize X-Zentib, including the following:
+●
+the development of X-Zentib, including X-Zitib, the following:
+●
+the development of X-Zentib, including the following:
+●
+the development of X-Zentib in the Phase 1, clinical trials of X-Zentib, or the following:
+●
+our product candidates, including the following:
+●
+our product candidates, including our product candidates, including our product candidates, will rely on the regulatory approval of X-Zentib, or any future product candidates, including the following:
+●
+our ability to select and commercialize X-Zentib, including our product candidates, including our product candidates, if approved, and for the following:
+●
+our limited development of X-Zentib, including our product candidates, including our product candidates, and any future product candidates, including our product candidates, are commercialized by the other parties to collaborate with these third parties.
+●
+Our ability to obtain and commercialize X-Zentib, including our product candidates, including
+---------------

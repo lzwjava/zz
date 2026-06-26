@@ -1,0 +1,18 @@
+NOTES TO CONSOLIDATED FINANCIAL STATEMENTS
+
+Note 2. Revenue Recognition
+
+We derive revenue primarily from subscription services, professional services, and hardware sales. Subscription revenue includes fees for access to our cloud-based software platform, which is recognized ratably over the subscription term, typically one to three years. Professional services revenue includes implementation, training, and consulting services, which are recognized as the services are delivered. Hardware revenue is recognized upon delivery and acceptance by the customer.
+
+The following table presents our revenue disaggregated by type (in thousands):
+
+                                             Year Ended December 31,
+                                             2023           2022           2021
+Subscription revenue                       $  380,016     $  281,834     $  198,543
+Professional services revenue                  89,432        82,215        71,206
+Hardware revenue                               17,756        17,756        15,892
+Total revenue                              $  487,204     $  381,805     $  285,641
+
+Remaining Performance Obligations
+
+As of December 31, 2023, the aggregate amount of the transaction price allocated to remaining performance obligations was $892.3 million, of which we expect to recognize approximately 65% as revenue during the next 12 months and the remainder thereafter.

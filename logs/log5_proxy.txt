@@ -1,0 +1,26 @@
+Overriding: out_dir = out-sec-edgar-124m
+Overriding: start = FILE:/mnt/data/zz/prompt5_proxy.txt
+Overriding: num_samples = 1
+Overriding: max_new_tokens = 1200
+Overriding: temperature = 0.7
+number of parameters: 123.59M
+No meta.pkl found, assuming GPT-2 encodings...
+PROXY STATE SUMMARY
+
+Compensation Discussion and Analysis
+
+Executive Compensation Philosophy
+
+Our executive compensation program is designed to attract, retain, and motivate talented executives who can drive our business strategy and create long-term stockholder value. The program emphasizes pay-for-performance, with a significant portion of total compensation tied to the achievement of financial and operational goals.
+
+The following table summarizes the total compensation for our named executive officers for the year ended December 31, 2023:
+
+Name and Principal Position     Salary     Bonus     Stock Awards     Option Awards     All Other     Total
+James R. Thompson               $   625,000  $   125,000  $  3,450,000  $  1,234,000  $    45,678  $  5,479,678
+Chief Executive Officer
+Sarah M. Chen                   $   475,000  $    95,000  $  2,100,000  $    890,000  $    32,456  $  3,592,456
+Chief Financial Officer
+Michael D. Rodriguez            $   425,000  $    85,000  $  1,750,000  $    678,000  $    28,912  $  2,966,912
+Chief Technology Officer
+William R. Gras                                                  100,000  $                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+---------------

@@ -1,0 +1,11 @@
+ITEM 7. MANAGEMENT'S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS
+
+Results of Operations
+
+Revenue
+
+Total revenue increased by $105.4 million, or 28%, to $487.2 million for the year ended December 31, 2023, from $381.8 million for the year ended December 31, 2022. The increase was primarily attributable to growth in subscription revenue, which increased by $98.2 million, or 35%, driven by new customer acquisitions and expanded usage from existing customers. Professional services revenue increased by $7.2 million, or 8%, reflecting increased implementation activity.
+
+Cost of Revenue and Gross Profit
+
+Cost of revenue increased by $31.2 million, or 22%, to $173.4 million for the year ended December 31, 2023, from $142.2 million for the year ended December 31, 2022. The increase was primarily due to higher hosting costs associated with our cloud infrastructure and increased headcount in our customer support organization. Gross profit margin improved to 64.4% for the year ended December 31, 2023, compared to 62.7% for the prior year, reflecting economies of scale in our cloud infrastructure.

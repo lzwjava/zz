@@ -1,0 +1,50 @@
+Overriding: out_dir = out-sec-edgar-124m
+Overriding: start = FILE:/mnt/data/zz/prompt3_risk.txt
+Overriding: num_samples = 1
+Overriding: max_new_tokens = 1200
+Overriding: temperature = 0.7
+number of parameters: 123.59M
+No meta.pkl found, assuming GPT-2 encodings...
+RISK FACTORS
+
+Risks Related to Our Business
+
+We have a history of net losses and may not achieve or maintain profitability in the future.
+
+We incurred net losses of $42.3 million, $67.8 million, and $89.1 million for the years ended December 31, 2023, 2022, and 2021, respectively. As of December 31, 2023, we had an accumulated deficit of $523.4 million. We expect to continue to incur significant expenses related to research and development, sales and marketing, and general administrative operations as we expand our business. We may not achieve or maintain profitability in the future.
+
+Our quarterly operating results may fluctuate significantly, which could cause our stock price to decline.
+
+Our quarterly revenue and operating results have varied in the past and may continue to vary significantly from quarter to quarter. Our revenue growth rate may decline in future periods as our revenue base increases. Factors that may cause our quarterly results to fluctuate include the timing of large enterprise contracts, seasonal purchasing patterns in the healthcare industry, and the impact of regulatory changes on customer buying decisions. Any of the following factors could cause our quarterly revenue growth rate to fall, or if our operating results fall below, our operating costs may not grow or may not achieve profitability in future periods.
+We have financed and expect to continue to incur losses and we may not achieve profitability in the future.
+
+We have incurred significant losses since inception and expect our net losses since inception and expect to continue to incur losses and we may never achieve profitability through the development and commercialization of our product candidates. Many of our product candidates are in development, and we have not yet generated any revenue from product sales. We have experienced significant operating losses since inception and expect to continue to incur losses on our own and through the sale of common stock in the future.
+We have incurred significant net losses since inception and have incurred negative opinion and our operating losses since inception.
+
+We continue to develop and market new products and technologies in the development and commercialization of our product candidates, and as a result, our revenues from product sales and marketing, are subject to product commercialization and regulatory requirements. We cannot be certain that we will ever achieve profitability through sales of product candidates, if ever, and as a result, we will never achieve profitability in the future. Our success depends on the discovery of new products, technology, manufacturing, regulatory, and commercialization of our product candidates. We may never be able to achieve or maintain profitability through the sale of new products. If we are unable to successfully develop new products or product candidates, our business will be materially harmed and we may never achieve profitability.
+
+Our future success depends upon our ability to develop and commercialize our product candidates. We intend to create new technologies that are the subject of technological change. If we are unable to maintain and maintain the required level of funding necessary to achieve profitability, we will be unable to continue to operate our business.
+
+If we are unable to obtain and maintain commercialize our product candidates, our business would be materially and adversely affected.
+
+We may need to expand our research and development and commercialization programs, which could result in an increased level of market acceptance, or significantly increase our spending and our ability to develop and commercialize our product candidates.
+We may need to seek to expand our product candidates through clinical trials in clinical trials.
+Our business is subject to the inherent risks associated with each our product candidates. If we are unable to obtain and maintain regulatory approval for any product candidates, we or our collaborators may not be able to enter into successfully commercializing our product candidates successfully. If we fail to achieve and maintain regulatory approval, or if we are unable to successfully commercialize our product candidates, our business will be materially and adversely affected.
+We have suffered a number of risks involved in our research and development programs. The development and commercialization of our product candidates may require us to relinquish the or other product candidates we develop.
+If we are unable to develop and commercialize our product candidates effectively, our business prospects may be harmed.
+Our product candidates may fail to develop, develop and commercialize our product candidates may fail.
+Our business is subject to numerous risks inherent in conducting our business strategy and our future plans may not be successful.
+Our future research and development activities may never generate or do so on commercially reasonable terms, or at all. We are also dependent on third-party manufacturers of future collaborators and other third-party manufacturers. The industries we have may in our future research and development activities may not achieve or maintain profitability. Our reliance on third-party manufacturers, if and when we fail to manufacture, develop, market, market and distribute our product candidates may fail.
+Our future success depends on our ability to develop and commercialize our future product candidates for the development of our product candidates. We have not yet selected and the future research and development activities as a whole, do not currently, and we cannot guarantee future rights to advance our development activities. Our future success will depend on our ability to develop and commercialize our product candidates.
+Our success depends on our ability to address the commercialization of our product candidates, and if we do not successfully develop and commercialize our product candidates, our business will be harmed.
+If we encounter difficulties in the development and commercialization of our product candidates, our business may be harmed.
+Our future success will depend on our ability to identify, develop and commercialize our product candidates.
+We have only recently completed the development of our product candidates.
+Our development plan and commercialization of our product candidates could be delayed if we do not effectively develop and commercialize our product candidates. We have not planned any clinical trials on our planned clinical trials to identify and develop and commercialize our product candidates and we may never generate revenue from the commercialization of our product candidate. We will also ever seek to enhance product candidates in seeking development and manufacturing, as well as in,
+if we may not be commercialized, product candidates, clinical trials, and commercialization of our product candidates.
+Our goal is to protect our business plan and other factors that could affect our business, financial condition, operating results, and prospects.
+We expect to rely on third-party manufacturers and product candidates to conduct our business model and to support and, as a result, our business may be harmed. The development of our product candidates may be delayed or terminated.
+Our product candidates may not achieve a successful development of our product candidates.
+Our future product candidates may not achieve the results of any problems to be subject to the problems of our clinical trials. In such case, our future products may not achieve adequate market acceptance or commercialization and commercialization. Any of these occurrences could result in the delay or termination of any of their development or commercializing our product candidates.
+We currently have limited ability to do so. If we are unsuccessful in obtaining and maintaining our rights to commercialize our product candidates, our product candidates may fail to obtain regulatory
+---------------

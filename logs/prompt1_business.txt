@@ -1,0 +1,9 @@
+ITEM 1. BUSINESS
+
+Overview
+
+We are a leading provider of cloud-based enterprise software solutions for the healthcare industry. Our platform enables hospitals, clinics, and other healthcare organizations to streamline their operations, improve patient outcomes, and reduce costs. We serve over 2,500 customers across 48 states, including 18 of the top 25 hospital systems in the United States.
+
+Our solutions address critical challenges in healthcare delivery, including electronic health records (EHR), practice management, revenue cycle management, and population health analytics. Our AI-powered clinical decision support tools help physicians make better-informed treatment decisions, while our interoperability platform enables seamless data exchange between disparate healthcare systems.
+
+For the fiscal year ended December 31, 2023, we generated revenue of approximately $487.2 million, representing a 28% increase from the prior year. Our subscription revenue, which accounted for 78% of total revenue, grew 35% year-over-year. We had approximately 8,200 full-time employees as of December 31, 2023.
