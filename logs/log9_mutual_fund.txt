@@ -1,0 +1,190 @@
+Overriding: out_dir = /mnt/data/nanoGPT/out-sec-edgar-124m
+Overriding: start = FILE:/mnt/data/zz/prompt9_mutual_fund.txt
+Overriding: num_samples = 1
+Overriding: max_new_tokens = 1000
+Overriding: temperature = 0.7
+number of parameters: 123.59M
+No meta.pkl found, assuming GPT-2 encodings...
+Mutual Fund Operations and Performance
+
+Our asset management division manages 147 mutual fund strategies with combined assets under management of $89.4 billion as of December 31, 2023. Equity funds accounted for 52% of AUM, fixed income 31%, and multi-asset 17%. Net inflows totaled $6.2 billion for the year, driven by strong performance in our emerging markets equity fund which returned 18.4% versus the benchmark 12.1%.
+
+Management fee revenue increased 12% to $1.1 billion, reflecting average fee rates of 62 basis points. Distribution costs and trailer fees totaled $340 million. Operating expenses were flat at $420 million as technology investments offset headcount reductions. Operating expenses were lower at $1.9 billion for the year, which was primarily driven by lower personnel costs as a result of the increases in the Company's cash flow from asset and customer deposit accounts.
+
+Operating expenses were comprised of professional fees, marketing commissions and customer service charges, and administrative expenses, partially offset by a $1.6 million reduction in operating revenues. Operating expenses were comprised of consulting fees, product development fees, stock-based compensation and other expenses, and other general and administrative expenses.
+
+Income taxes were comprised of the following components:
+Year Ended December 31,
+2024
+2023
+2021
+(dollars in thousands)
+Current assets:
+Accounts receivable
+$
+8,019
+$
+8,871
+$
+8,090
+Accounts receivable, trade
+2,824
+3,959
+2,092
+Prepaid expenses
+2,936
+4,198
+1,845
+Total current assets
+4,975
+4,936
+3,052
+Property and equipment, net
+1,521
+2,874
+2,972
+Intangible assets, net
+1,826
+2,937
+2,829
+Goodwill
+1,923
+2,09
+2,854
+Total assets
+$
+2,731,927
+$
+3,834,921
+$
+3,828,099
+Liabilities and Shareholders' Equity
+Current liabilities:
+Accounts payable
+$
+2,835
+$
+2,936
+Accounts payable
+8,000
+2,000
+Accrued expenses
+2,869
+2,890
+Accrued liabilities
+1,854
+2,742
+Income taxes
+3,876
+2,616
+Accrued expenses
+2,821
+2,854
+1,871
+Accrued liabilities
+2,878
+2,941
+Deferred revenue
+3,888
+3,959
+3,857
+Total liabilities
+2,732,932
+2,935
+2,939
+Commitments and contingencies (Note 10)
+Stockholders' Equity
+Preferred stock, $0.0001 par value, 10,000,000,000 shares authorized, issued and outstanding at December 31, 2022 and 2021, respectively
+—
+—
+—
+Common stock, no par value, 10,000,000 shares authorized, issued and outstanding at December 31, 2022 and 2021, respectively
+—
+—
+—
+Common stock, no par value, 9,000,000,000 shares authorized, issued and outstanding at December 31, 2022 and 2021, respectively
+2,858
+1,856
+Additional paid-in capital
+63,872
+38,937
+Total stockholders' equity
+2,732,967
+2,944
+2,938,854
+See accompanying notes to consolidated financial statements.
+F-31
+CHEDULE I
+Item 1.
+Properties
+Consolidated
+    Consolidated
+   Balance Sheets
+Consolidated
+    Statements of Operations
+Consolidated
+    Operations
+Consolidated
+    Statements of Comprehensive
+   Operations
+Consolidated
+    Operations
+Consolidated
+    Operations
+Consolidated
+    Statements of Comprehensive
+    Operations
+Consolidated
+    Comprehensive
+   Income
+    and Cash
+    and
+    Cash
+    and
+    Cash
+    and
+    Cash
+    and
+   Cash
+    and
+   Cash
+     and Cash
+    and
+    Cash
+     and
+   Cash
+     and
+    Cash
+    and
+ Cash
+     and
+   Cash
+    and
+    Cash
+and
+      Cash
+and
+     Cash
+    and
+    Cash
+    and
+Cash
+     and
+    Cash
+     and
+Cash
+     and
+   Cash
+     and
+Cash
+    
+   and
+   Cash
+     and
+   Cash
+    and
+Cash
+    
+and
+     Cash
+---------------
