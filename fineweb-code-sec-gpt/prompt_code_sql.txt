@@ -1,0 +1,1 @@
+Write a SQL query to find the top 5 customers by total purchase amount in 2024. Tables: customers(id, name, email), orders(id, customer_id, order_date, total_amount). Consider customers who made more than 3 purchases and exclude cancelled orders (status = 'cancelled').

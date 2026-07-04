@@ -1,0 +1,1 @@
+Write a Go HTTP server that exposes a /api/status endpoint returning JSON with server uptime, request count, and memory usage. The server should gracefully handle SIGINT and SIGTERM for clean shutdown.

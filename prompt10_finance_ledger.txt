@@ -1,0 +1,5 @@
+Finance Ledger Adjustments and Journal Controls
+
+Our general ledger platform processes approximately 45,000 finance journal entries per month across 340 legal entities. Manual adjustments represent 18% of total postings, with an average value of $2.4 million per journal. We maintain maker-checker controls requiring dual authorization for all adjustments exceeding $500,000.
+
+During the year ended December 31, 2023, our finance team processed 8,200 adjusting entries related to intercompany eliminations, foreign currency revaluations, and accrual true-ups. The reconciliation module identified $12.3 million in out-of-balance items, of which 94% were resolved within the standard five-day SLA.

@@ -1,0 +1,5 @@
+Digital Banking Platform Overview
+
+We operate a leading digital banking platform serving over 12 million active customers across Southeast Asia. Our mobile-first platform processes approximately 2.8 million transactions daily, with a total payment volume of $14.6 billion for the fiscal year ended December 31, 2023. We offer deposit accounts, digital wallets, peer-to-peer transfers, and merchant payment solutions.
+
+Our net interest income grew 34% year-over-year to $287 million, driven by deposit growth of 42% and a net interest margin of 3.2%. Non-interest income from payment processing fees and subscription services contributed $156 million, representing 35% of total revenue.

@@ -1,0 +1,1 @@
+Write a Python function that implements merge sort. The function should take a list of integers and return a sorted list. Include type hints and a docstring.
