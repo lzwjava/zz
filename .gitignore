@@ -5,6 +5,7 @@
 *.parquet
 *.bz2
 *.xml
+*.db
 
 # Python
 __pycache__/
