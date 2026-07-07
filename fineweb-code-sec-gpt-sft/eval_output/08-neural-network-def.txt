@@ -1,0 +1,7 @@
+PROMPT
+Explain what a neural network is in one sentence.
+
+RESPONSE
+A neural network is a type of machine learning model that uses a combination of self-learning algorithms and neural networks to learn patterns and relationships in data. It's a powerful tool for understanding complex data and making predictions, but it's not a traditional neural network in the classical sense. Instead, it's a type of deep learning model that uses a combination of neural networks and a learning algorithm that is trained on a dataset to learn patterns and relationships.
+
+VERDICT: FAIL — circular definition ("neural network uses neural networks"), self-contradictory.

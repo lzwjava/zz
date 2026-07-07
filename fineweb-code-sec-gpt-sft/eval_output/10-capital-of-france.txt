@@ -1,0 +1,7 @@
+PROMPT
+Capital of France?
+
+RESPONSE
+The capital of France is Paris.
+
+VERDICT: PASS — correct.

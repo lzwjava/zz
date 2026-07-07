@@ -1,0 +1,22 @@
+PROMPT
+Write a Python function to check if a string is a palindrome.
+
+RESPONSE
+Here's a simple Python function to check if a string is a palindrome:
+
+```python
+def is_palindrome(s):
+    s = ''.join(c for c in s if c.isalnum()).lower()
+    return s == s[::-1]
+```
+
+This function works by first removing all non-alphanumeric characters from the string and converting it to lowercase. It then checks if the resulting string is equal to its reverse (`s[::-1]`). If they are equal, the function returns `True`, indicating that the string is a palindrome; otherwise, it returns `False`.
+
+You can use this function like this:
+
+```python
+print(is_palindrome("A man, a plan, a canal: Panama"))  # True
+print(is_palindrome("hello"))  # False
+```
+
+VERDICT: PASS — correct code, clean explanation, usage examples.

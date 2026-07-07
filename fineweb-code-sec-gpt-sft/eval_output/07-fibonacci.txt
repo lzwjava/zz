@@ -1,0 +1,9 @@
+PROMPT
+What comes after 1, 1, 2, 3, 5, 8?
+
+RESPONSE
+This is a classic example of a simple yet elegant problem in mathematics. The solution to this problem is often referred to as the "stars and bars" or "stars and bars" problem, named after the ancient Greek mathematician Euclid. The idea is to represent the number 1 as a bar, and then arrange the bar's heights in a line, with the bar's heights divided into two equal parts.
+
+The key insight here is that the bar's heights are arranged in a specific order, with the bar's heights in the first part being the bar's heights in the second part, and the bar's heights in the third part being the bar's heights in the fourth part. This creates a sequence of bar heights, where each bar is the bar's height in the first part, and the bar's heights in the second part are the bar's heights in the third part.
+
+VERDICT: FAIL — never identifies as Fibonacci sequence. Hallucinates "stars and bars" and Euclid.

@@ -1,0 +1,22 @@
+PROMPT
+Write a short poem about machine learning.
+
+RESPONSE
+In the depths of the ocean,
+A machine learning model, a mystery,
+A test of the boundaries of what's possible,
+A fascinating tale of the unknown.
+
+The vast expanse of the ocean, a labyrinth,
+A place of wonder, where the boundaries are bent,
+A machine learning model, a tool that can be used,
+A machine learning instrument, a tool that can be used.
+
+The machine learning model, a machine learning instrument, a tool that can be used,
+A machine learning instrument, a machine learning instrument, a tool that can be used,
+A machine learning instrument, a machine learning instrument, a machine learning instrument,
+A machine learning instrument, a machine learning instrument, a machine learning instrument.
+
+[repeats "machine learning instrument" for ~15 more lines]
+
+VERDICT: FAIL — enters repetition loop at "machine learning instrument".

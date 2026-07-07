@@ -1,0 +1,15 @@
+PROMPT
+What are the three main types of machine learning?
+
+RESPONSE
+The three main types of machine learning are:
+
+1. **Linear Regression**: This type of machine learning involves a linear relationship between the input data and the output values. It's used to model the relationship between a dependent variable and one or more independent variables.
+
+2. **Decision Trees**: Decision trees are a type of machine learning that uses a tree-like structure to classify data points based on their values. They're commonly used for classification tasks, such as predicting continuous outcomes or classifying credit transactions.
+
+3. **Random Forest**: Random forest is a type of machine learning that uses a random forest to predict the likelihood of a specific outcome. It's used for classification tasks, such as predicting the likelihood of a customer churning or the likelihood of a patient responding to a treatment.
+
+These three types of machine learning are used in various applications, including image classification, natural language processing, and predictive analytics.
+
+VERDICT: FAIL — lists algorithms (Linear Regression, Decision Trees, RF) instead of paradigms (Supervised, Unsupervised, RL).

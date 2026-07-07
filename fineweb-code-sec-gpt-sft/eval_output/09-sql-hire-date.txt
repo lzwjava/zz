@@ -1,0 +1,21 @@
+PROMPT
+Write a SQL query to find all employees hired in 2023.
+
+RESPONSE
+To find all employees hired in 2023, you can use the following SQL query:
+
+```sql
+SELECT * FROM employees WHERE name = 'John Doe';
+```
+
+This query selects all columns from the `employees` table where the `name` column matches the string 'John Doe'.
+
+If you want to use a specific column instead of a string, you can modify the query like this:
+
+```sql
+SELECT * FROM employees WHERE name = 'John Doe' AND name = 'Jane Doe';
+```
+
+This query uses the `AND` operator to combine the `name` and `name` columns into a single string, which is then used to filter the results.
+
+VERDICT: FAIL — ignores date filter entirely. Uses WHERE name instead of date condition.

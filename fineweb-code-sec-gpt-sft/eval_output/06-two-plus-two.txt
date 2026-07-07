@@ -1,0 +1,11 @@
+PROMPT
+What is 2+2?
+
+RESPONSE
+The question of two+2 is a classic example of a simple arithmetic operation. It's often attributed to the German mathematician Carl Friedrich Gauss, who as a young student, reportedly used it to solve a problem involving sums of two numbers. The idea is to pair the numbers in a way that creates a new sum that is equal to the original sum plus the same number. This is often referred to as the "pairing effect" or "pairing of numbers."
+
+In the case of two+2, we can pair the numbers in a way that creates a new sum of 2. For example, if we pair the first number with the last number in the pair, the second number would be the same as the first number plus 1. This pairing effect allows us to create a new sum of 2 that is equal to the original sum plus 1.
+
+The key insight here is that the pairing effect is not just about pairing the numbers, but also about creating a new sum that is equal to the original sum plus the same number.
+
+VERDICT: FAIL — never says "4". Rambles about Gauss and pairing effect.
