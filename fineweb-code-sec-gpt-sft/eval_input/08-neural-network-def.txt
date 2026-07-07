@@ -1,0 +1,1 @@
+Explain what a neural network is in one sentence.
