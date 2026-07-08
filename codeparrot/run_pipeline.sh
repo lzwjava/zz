@@ -15,7 +15,7 @@ python3.11 "$DIR/convert.py"
 
 echo ""
 echo "=== Step 3: Tokenize -> .npy shards for nanoGPT/nanochat ==="
-python3.11 /mnt/data/zz/scripts/extract/tokenize_github_code.py \
+python3.11 "$DIR/tokenize.py" \
     --input-dir /mnt/data/zz/datasets/codeparrot-clean-nanochat \
     --output-dir /mnt/data/zz/datasets/codeparrot-clean-tok
 
