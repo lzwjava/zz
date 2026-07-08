@@ -35,7 +35,7 @@ echo ""
 echo "=== Step 2: Pretrain base model ==="
 python -m scripts.base_train \
     --depth=12 \
-    --device-batch-size=8 \
+    --device-batch-size=4 \
     --total-batch-size=65536 \
     --max-seq-len=2048 \
     --window-pattern L \
