@@ -1,34 +1,36 @@
 #!/usr/bin/env python3
-"""Download the codeparrot/codeparrot-clean-train dataset (~12.7 GB gzipped).
+"""Download the codeparrot/codeparrot-clean dataset with parallel workers.
 
-Python-only source code, ~50 GB uncompressed, 5.3M files across 53 shards.
-
-Dataset: https://huggingface.co/datasets/codeparrot/codeparrot-clean-train
-
-Files are named file-000000000001.json.gz .. file-000000000053.json.gz.
-Each is NDJSON (one JSON object per line, each = one file's content + metadata).
+Python-only source code, ~12.7 GB gzipped across 53 train shards + 1 valid shard.
 
 Usage:
-    # Download all 53 shards
+    # Full download (default: 8 parallel workers)
     python3.11 download.py
 
-    # Valid set only (smoke test, 1 shard, ~142 MB)
+    # 16 parallel workers
+    python3.11 download.py --workers 16
+
+    # Valid set only (smoke test)
     python3.11 download.py --valid-only
 
-    # Download only 5 GB smoke test
-    python3.11 download.py --target-gb 5
+    # With hf_transfer (2-5x faster)
+    HF_HUB_ENABLE_HF_TRANSFER=1 python3.11 download.py --workers 16
 
-Output: /mnt/data/zz/datasets/codeparrot-clean/file-000000000001.json.gz ...
+Output: /mnt/data/zz/datasets/codeparrot-clean/file-*.json.gz
 """
 
 import argparse
+import concurrent.futures
 import os
 import subprocess
+import threading
 import time
 
 REPO_ID = "codeparrot/codeparrot-clean"
-TRAIN_FILES = [f"file-{i:012d}.json.gz" for i in range(1, 54)]  # 53 shards
+TRAIN_FILES = [f"file-{i:012d}.json.gz" for i in range(1, 54)]
 VALID_FILE = "file-000000000054.json.gz"
+
+_progress_lock = threading.Lock()
 
 
 def human_bytes(n):
@@ -38,28 +40,57 @@ def human_bytes(n):
         n /= 1024
 
 
-def get_file_size(filename):
-    """Get size of a single file from HF repo listing."""
+def get_file_sizes(files):
+    """Batch-lookup file sizes from HF."""
     from huggingface_hub import HfApi
     api = HfApi()
-    if filename == VALID_FILE:
+    sizes = {}
+    for fn in files:
+        repo = "codeparrot/codeparrot-clean-valid" if fn == VALID_FILE else REPO_ID
+        for f in api.list_repo_tree(repo, repo_type="dataset"):
+            if f.path == fn:
+                sizes[fn] = f.size or 0
+                break
+    return sizes
+
+
+def download_one(args):
+    """Download a single file via wget. Returns (fn, bytes_downloaded, error_str)."""
+    fn, expected, output_dir = args
+    dest = os.path.join(output_dir, fn)
+
+    if fn == VALID_FILE:
         repo = "codeparrot/codeparrot-clean-valid"
     else:
         repo = REPO_ID
-    for f in api.list_repo_tree(repo, repo_type="dataset"):
-        if f.path == filename:
-            return f.size or 0
-    return 0
+
+    if os.path.exists(dest) and os.path.getsize(dest) > expected * 0.9:
+        return (fn, os.path.getsize(dest), None, True)  # skipped
+
+    url = f"https://huggingface.co/datasets/{repo}/resolve/main/{fn}"
+
+    try:
+        result = subprocess.run(
+            ["wget", "-q", "-c", "-O", dest, url],
+            timeout=600, capture_output=True, text=True)
+        if result.returncode != 0:
+            return (fn, 0, result.stderr[:200], False)
+        actual = os.path.getsize(dest)
+        return (fn, actual, None, False)
+    except subprocess.TimeoutExpired:
+        return (fn, 0, "TIMEOUT", False)
+    except Exception as e:
+        return (fn, 0, str(e), False)
 
 
 def main():
-    p = argparse.ArgumentParser(description=__doc__,
-                                formatter_class=argparse.RawDescriptionHelpFormatter)
-    p.add_argument("--target-gb", type=float, default=0,
-                   help="Stop after downloading this many GB (default: all)")
+    p = argparse.ArgumentParser(description=__doc__)
+    p.add_argument("--workers", type=int, default=8,
+                   help="Parallel downloads (default: 8)")
     p.add_argument("--valid-only", action="store_true",
-                   help="Download only the valid set (1 shard, smoke test)")
-    p.add_argument("--output-dir", default="/mnt/data/zz/datasets/codeparrot-clean",
+                   help="Download only the valid set")
+    p.add_argument("--output-dir",
+                   default="/mnt/data/zz/datasets/codeparrot-clean",
                    help="Output directory")
     args = p.parse_args()
 
@@ -70,96 +101,67 @@ def main():
     else:
         files = TRAIN_FILES + [VALID_FILE]
 
-    print("Looking up file sizes...", flush=True)
-    file_sizes = {}
-    for fn in files:
-        file_sizes[fn] = get_file_size(fn)
+    print(f"Looking up {len(files)} file sizes...", flush=True)
+    file_sizes = get_file_sizes(files)
     total_available = sum(file_sizes.values())
-    print(f"  {len(files)} files, {human_bytes(total_available)} total (gzipped)")
+    print(f"  {human_bytes(total_available)} total (gzipped), "
+          f"{args.workers} workers", flush=True)
+
+    if os.environ.get("HF_HUB_ENABLE_HF_TRANSFER"):
+        print("  hf_transfer enabled (expect 2-5x faster per-stream)")
     print()
 
-    selected = files[:]
-    if args.target_gb > 0:
-        target_bytes = int(args.target_gb * 1024**3)
-        selected = []
-        running = 0
-        for fn in files:
-            if running >= target_bytes:
-                break
-            selected.append(fn)
-            running += file_sizes.get(fn, 0)
-        print(f"Plan: download {len(selected)} files (~{human_bytes(running)})")
-    else:
-        running = total_available
+    # Build task list
+    tasks = [(fn, file_sizes.get(fn, 0), args.output_dir) for fn in files]
 
-    print()
-
+    # Stats tracking (thread-safe via lock)
     t0 = time.time()
     done_bytes = 0
-    skipped = 0
-    errors = 0
+    done_count = 0
+    skip_count = 0
+    err_count = 0
+    total = len(tasks)
 
-    for i, fn in enumerate(selected, 1):
-        expected = file_sizes.get(fn, 0)
-        dest = os.path.join(args.output_dir, fn)
+    print(f"Downloading {total} files with {args.workers} parallel workers...")
+    print()
 
-        if fn == VALID_FILE:
-            repo = "codeparrot/codeparrot-clean-valid"
-        else:
-            repo = REPO_ID
+    with concurrent.futures.ThreadPoolExecutor(max_workers=args.workers) as exe:
+        futures = {exe.submit(download_one, t): t[0] for t in tasks}
+        for future in concurrent.futures.as_completed(futures):
+            fn, size, err, skipped = future.result()
+            with _progress_lock:
+                if skipped:
+                    skip_count += 1
+                    done_bytes += size
+                elif err:
+                    err_count += 1
+                    print(f"  FAIL {fn}: {err[:80]}", flush=True)
+                else:
+                    done_count += 1
+                    done_bytes += size
 
-        if os.path.exists(dest) and os.path.getsize(dest) > expected * 0.9:
-            skipped += 1
-            done_bytes += os.path.getsize(dest)
-            if i % 10 == 0:
                 elapsed = time.time() - t0
                 rate = done_bytes / elapsed / 1024 / 1024 if elapsed > 0 else 0
-                print(f"  [{i}/{len(selected)}] cached | "
-                      f"{human_bytes(done_bytes)} | {rate:.1f} MB/s", flush=True)
-            continue
-
-        url = f"https://huggingface.co/datasets/{repo}/resolve/main/{fn}"
-        print(f"  [{i}/{len(selected)}] {fn}...", end="", flush=True)
-
-        try:
-            result = subprocess.run(
-                ["wget", "-q", "--show-progress", "-c", "-O", dest, url],
-                timeout=600, capture_output=True, text=True)
-            if result.returncode != 0:
-                print(f" wget error: {result.stderr[:200]}")
-                errors += 1
-                continue
-
-            actual = os.path.getsize(dest)
-            done_bytes += actual
-            elapsed = time.time() - t0
-            rate = done_bytes / elapsed / 1024 / 1024 if elapsed > 0 else 0
-            pct_str = ""
-            if args.target_gb > 0:
-                pct = done_bytes / (args.target_gb * 1024**3) * 100
-                pct_str = f" ({pct:.0f}%)"
-            print(f" {human_bytes(actual)} | "
-                  f"{human_bytes(done_bytes)}{pct_str} | "
-                  f"{rate:.1f} MB/s", flush=True)
-
-        except subprocess.TimeoutExpired:
-            print(f" TIMEOUT")
-            errors += 1
-        except Exception as e:
-            print(f" ERROR: {e}")
-            errors += 1
-
-        if args.target_gb > 0 and done_bytes >= args.target_gb * 1024**3:
-            print(f"\nReached target {human_bytes(done_bytes)}.")
-            break
+                remaining = total - done_count - skip_count - err_count
+                print(
+                    f"  [{done_count + skip_count + err_count}/{total}] "
+                    f"{fn}: {human_bytes(size):>8} | "
+                    f"{human_bytes(done_bytes):>8} total | "
+                    f"{rate:.1f} MB/s | "
+                    f"{remaining} remaining",
+                    flush=True
+                )
 
     elapsed = time.time() - t0
-    downloaded = len(selected) - skipped - errors
-    print(f"\nDone. {human_bytes(done_bytes)} in {args.output_dir}")
-    print(f"  {downloaded} downloaded, {skipped} cached, "
-          f"{errors} errors, {elapsed/60:.1f} min")
-    print(f"\nNext step:")
-    print(f"  python3.11 convert.py")
+    print()
+    print(f"Done. {human_bytes(done_bytes)} in {args.output_dir}")
+    print(f"  {done_count} downloaded, {skip_count} cached, "
+          f"{err_count} errors, {elapsed/60:.1f} min")
+    if err_count > 0:
+        print(f"  Re-run to retry failed files (wget -c resumes partials)")
+    print()
+    print("Next step:")
+    print("  python3.11 convert.py")
 
 
 if __name__ == "__main__":
