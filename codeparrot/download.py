@@ -5,18 +5,18 @@ Python-only source code, ~50 GB uncompressed, 5.3M files across 53 shards.
 
 Dataset: https://huggingface.co/datasets/codeparrot/codeparrot-clean-train
 
-Files are named file-000000000001.json.gz … file-000000000053.json.gz.
+Files are named file-000000000001.json.gz .. file-000000000053.json.gz.
 Each is NDJSON (one JSON object per line, each = one file's content + metadata).
 
 Usage:
     # Download all 53 shards
-    python3.11 scripts/download/download_codeparrot_clean.py
+    python3.11 download.py
 
     # Valid set only (smoke test, 1 shard, ~142 MB)
-    python3.11 scripts/download/download_codeparrot_clean.py --valid-only
+    python3.11 download.py --valid-only
 
     # Download only 5 GB smoke test
-    python3.11 scripts/download/download_codeparrot_clean.py --target-gb 5
+    python3.11 download.py --target-gb 5
 
 Output: /mnt/data/zz/datasets/codeparrot-clean/file-000000000001.json.gz ...
 """
@@ -42,7 +42,6 @@ def get_file_size(filename):
     """Get size of a single file from HF repo listing."""
     from huggingface_hub import HfApi
     api = HfApi()
-    # Determine which repo has the file
     if filename == VALID_FILE:
         repo = "codeparrot/codeparrot-clean-valid"
     else:
@@ -66,13 +65,11 @@ def main():
 
     os.makedirs(args.output_dir, exist_ok=True)
 
-    # Determine which files to download
     if args.valid_only:
         files = [VALID_FILE]
     else:
         files = TRAIN_FILES + [VALID_FILE]
 
-    # Look up actual sizes
     print("Looking up file sizes...", flush=True)
     file_sizes = {}
     for fn in files:
@@ -81,7 +78,6 @@ def main():
     print(f"  {len(files)} files, {human_bytes(total_available)} total (gzipped)")
     print()
 
-    # If target-gb set, determine how many files to download
     selected = files[:]
     if args.target_gb > 0:
         target_bytes = int(args.target_gb * 1024**3)
@@ -98,7 +94,6 @@ def main():
 
     print()
 
-    # Download each file via wget (resumable)
     t0 = time.time()
     done_bytes = 0
     skipped = 0
@@ -108,13 +103,11 @@ def main():
         expected = file_sizes.get(fn, 0)
         dest = os.path.join(args.output_dir, fn)
 
-        # Determine correct repo for this file
         if fn == VALID_FILE:
             repo = "codeparrot/codeparrot-clean-valid"
         else:
             repo = REPO_ID
 
-        # Skip if already downloaded
         if os.path.exists(dest) and os.path.getsize(dest) > expected * 0.9:
             skipped += 1
             done_bytes += os.path.getsize(dest)
@@ -165,9 +158,8 @@ def main():
     print(f"\nDone. {human_bytes(done_bytes)} in {args.output_dir}")
     print(f"  {downloaded} downloaded, {skipped} cached, "
           f"{errors} errors, {elapsed/60:.1f} min")
-    print(f"\nNext steps for nanoGPT/nanochat training:")
-    print(f"  Extract content and tokenize:")
-    print(f"  python3.11 scripts/extract/convert_codeparrot_for_nanochat.py")
+    print(f"\nNext step:")
+    print(f"  python3.11 convert.py")
 
 
 if __name__ == "__main__":

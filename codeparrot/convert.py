@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""Convert codeparrot-clean .json.gz (NDJSON) → nanochat format (text col parquet).
+"""Convert codeparrot-clean .json.gz (NDJSON) -> nanochat format (text col parquet).
 
 Reads each gzipped shard line by line, extracts the `content` field,
 and writes a parquet file with a single `text` column.
 Memory-efficient: processes line-by-line, writes in batches.
 
 Usage:
-    python3.11 scripts/extract/convert_codeparrot_for_nanochat.py
+    python3.11 convert.py
 
 Source: /mnt/data/zz/datasets/codeparrot-clean/file-*.json.gz
 Output: /mnt/data/zz/datasets/codeparrot-clean-nanochat/train_*.parquet
@@ -40,7 +40,7 @@ def main():
     sources = sorted(glob.glob(os.path.join(SRC_DIR, "file-*.json.gz")))
     if not sources:
         print(f"ERROR: No .json.gz files in {SRC_DIR}")
-        print("Run download_codeparrot_clean.py first.")
+        print("Run download.py first.")
         sys.exit(1)
 
     total_size = sum(os.path.getsize(f) for f in sources)
@@ -54,8 +54,6 @@ def main():
         base = os.path.basename(src)
         shard_num = get_shard_number(base)
 
-        # First 53 files = train, file 54 = valid set from codeparrot-clean-valid? 
-        # Actually file 54 was on the valid repo. Let's just number by shard.
         split = "val" if shard_num == 54 else "train"
         dst = os.path.join(DST_DIR, f"{split}_{shard_num:04d}.parquet")
 
@@ -92,7 +90,6 @@ def main():
                         n_skipped += 1
                         continue
 
-                    # Flush batch
                     if len(texts) >= BATCH_SIZE:
                         batch = pa.table({"text": pa.array(texts, type=pa.string())})
                         if writer is None:
@@ -100,7 +97,6 @@ def main():
                         writer.write_table(batch)
                         texts = []
 
-            # Flush remaining
             if texts:
                 batch = pa.table({"text": pa.array(texts, type=pa.string())})
                 if writer is None:
@@ -128,10 +124,6 @@ def main():
     total_bytes = sum(os.path.getsize(f) for f in all_dst)
     print(f"\nDone. {len(all_dst)} shards, {total_rows:,} rows, "
           f"{total_bytes/1e9:.2f} GB, {elapsed/60:.1f} min")
-    print(f"\nNext step — tokenize for nanoGPT/nanochat:")
-    print(f"  python3.11 scripts/extract/tokenize_github_code.py \\")
-    print(f"    --input-dir {DST_DIR} \\")
-    print(f"    --output-dir /mnt/data/zz/datasets/codeparrot-clean-tok")
 
 
 if __name__ == "__main__":
