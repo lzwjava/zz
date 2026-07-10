@@ -1,0 +1,516 @@
+2026-07-10 12:38:17,326 - nanochat.checkpoint_manager - [32m[1mINFO[0m - Loading model from /home/lzw/.cache/nanochat/base_checkpoints/d12 with step 87000
+2026-07-10 12:38:17,663 - nanochat.checkpoint_manager - [32m[1mINFO[0m - Building model with config: {'sequence_len': 2048, 'vocab_size': 32768, 'n_layer': 12, 'n_head': 6, 'n_kv_head': 6, 'n_embd': 768, 'window_pattern': 'L'}
+✓ Using Flash Attention 2 (NVIDIA CUDA)
+Device: cuda
+Loaded model step 87000, val_bpb: 0.3723
+======================================================================
+<|bos|>class TreeNode:
+    """Binary search tree node implementation."""
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+
+class BinarySearchTree:
+    """Binary search tree with insert, search, and delete operations."""
+    def __init__(self):
+        self.root = None
+
+    def insert(self, val):  # insert(val)
+        if self.root is None:
+            self.root = TreeNode(val)
+        else:
+            self.root.left = self.insert(val)
+            self.root.right = self.insert(val)
+
+    def search(self, val):  # search(val)
+        if self.root is None:
+            return None
+        if self.root.left is None:
+            return None
+        if self.root.right is None:
+            return None
+        if self.root.left.val == val and self.root.right.val == val:
+            return self.root.left.val
+        if self.root.left.val == val and self.root.right.val == val:
+            return self.root.right.val
+        return None
+
+    def delete(self, val):  # delete(val)
+        if self.root is None:
+            return None
+        if self.root.left is None:
+            return None
+        if self.root.right is None:
+            return None
+        if self.root.left.val == val and self.root.right.val == val:
+            self.root.right = self.root.right.left
+            self.root.left = self.root.left.right
+            self.root.right = self.root.right.left
+            return True
+
+    def __str__(self):
+        if self.root is None:
+            return "root"
+        return "(%s, %s, %s, %s)" % (self.root.left, self.root.right, self.root.val, self.root.right.val)
+
+    def __repr__(self):
+        return self.__str__()
+
+    def __len__(self):
+        if self.root is None:
+            return 0
+        return len(self.root)
+
+    def __iter__(self):
+        if self.root is None:
+            return
+        yield self.root.val
+        yield self.root.left.val
+        yield self.root.right.val
+
+    def __getitem__(self, key):
+        if self.root is None:
+            return None
+       
+======================================================================
+<|bos|>def longest_common_subsequence(text1: str, text2: str) -> int:
+    """
+    Compute the length of the longest common subsequence between two strings.
+    
+    Uses dynamic programming with a 2D table where dp[i][j] represents
+    the LCS length for text1[:i] and text2[:j].
+    
+    Args:
+        text1: First input string
+        text2: Second input string
+    
+    Returns:
+        Integer length of the longest common subsequence
+    """
+    m, n = len(text1), len(text2)
+    dp = [[0] * (n + 1) for _ in range(m + 1)]
+     # dp[i][j] represents the LCS length for text1[:i] and text2[:j]
+    for i in range(m):
+        for j in range(n):
+            dp[i][j] = max(dp[i][j], dp[i][j + 1])
+    return dp[m][n]
+
+def longest_common_subsequence_of_strings(text1: str, text2: str) -> int:
+    """
+    Compute the length of the longest common subsequence between two strings.
+    
+    Args:
+        text1: First input string
+        text2: Second input string
+    
+    Returns:
+        Integer length of the longest common subsequence
+    """
+    m, n = len(text1), len(text2)
+    dp = [[0] * (n + 1) for _ in range(m + 1)]
+    for i in range(m):
+        for j in range(n):
+            dp[i][j] = max(dp[i][j], dp[i][j + 1])
+    return dp[m][n]
+
+def longest_common_subsequence_of_strings_of_strings(text1: str, text2: str) -> int:
+    """
+    Compute the length of the longest common subsequence between two strings.
+    
+    Args:
+        text1: First input string
+        text2: Second input string
+    
+    Returns:
+        Integer length of the longest common subsequence
+    """
+    m, n = len(text1), len(text2)
+    dp = [[0] * (n + 1) for _ in range(m + 1)]
+    for i in range(m):
+        for j in range(n):
+            dp[i][j] = max(dp[i][j], dp[i][j + 1])
+    return dp[m][n]
+
+def longest_common_subsequence_of_strings_of_strings_of_strings(text1: str, text2: str)
+======================================================================
+<|bos|>import time
+import functools
+
+
+def timer_decorator(func):
+    """Decorator that prints the execution time of a function."""
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):  # pylint: disable=missing-docstring
+        start = time.time()
+        result = func(*args, **kwargs)
+        end = time.time()
+        print("Execution time: %.2f seconds" % (end - start))
+        return result
+    return wrapper
+
+
+def timer(func):
+    """Decorator that prints the execution time of a function."""
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):  # pylint: disable=missing-docstring
+        start = time.time()
+        result = func(*args, **kwargs)
+        end = time.time()
+        print("Execution time: %.2f seconds" % (end - start))
+        return result
+    return wrapper
+
+
+def timer_decorator(func):
+    """Decorator that prints the execution time of a function."""
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):  # pylint: disable=missing-docstring
+        start = time.time()
+        result = func(*args, **kwargs)
+        end = time.time()
+        print("Execution time: %.2f seconds" % (end - start))
+        return result
+    return wrapper
+
+
+def timer_decorator(func):
+    """Decorator that prints the execution time of a function."""
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):  # pylint: disable=missing-docstring
+        start = time.time()
+        result = func(*args, **kwargs)
+        end = time.time()
+        print("Execution time: %.2f seconds" % (end - start))
+        return result
+    return wrapper
+
+
+def timer_decorator(func):
+    """Decorator that prints the execution time of a function."""
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):  # pylint: disable=missing-docstring
+        start = time.time()
+        result = func(*args, **kwargs)
+        end = time.time()
+        print("Execution time: %.
+======================================================================
+<|bos|>import json
+import csv
+from pathlib import Path
+from typing import List, Dict, Optional
+
+
+def load_json_data(filepath: str) -> Optional[Dict]:
+    """Load JSON data from a file, with proper error handling."""
+    try:
+        path = Path(filepath)
+        if not path.exists():  # pragma: no cover
+            raise FileNotFoundError
+        with path.open() as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return None
+    except json.decoder.JSONDecodeError:
+        return None
+
+
+def load_csv_data(filepath: str) -> List[Dict]:
+    """Load CSV data from a file, with proper error handling."""
+    with open(filepath) as f:
+        reader = csv.reader(f)
+        return list(reader)
+
+
+def load_csv_data_from_json(filepath: str) -> List[Dict]:
+    """Load CSV data from a file, with proper error handling."""
+    with open(filepath) as f:
+        reader = csv.reader(f)
+        return list(reader)
+
+
+def load_csv_data_from_csv(filepath: str) -> List[Dict]:
+    """Load CSV data from a file, with proper error handling."""
+    with open(filepath) as f:
+        reader = csv.reader(f)
+        return list(reader)
+
+
+def load_json_data_from_csv(filepath: str) -> List[Dict]:
+    """Load JSON data from a file, with proper error handling."""
+    with open(filepath) as f:
+        reader = json.load(f)
+        return list(reader)
+
+
+def load_json_data_from_json(filepath: str) -> List[Dict]:
+    """Load JSON data from a file, with proper error handling."""
+    with open(filepath) as f:
+        reader = json.load(f)
+        return list(reader)
+
+
+def load_json_data_from_csv(filepath: str) -> List[Dict]:
+    """Load JSON data from a file, with proper error handling."""
+    with open(filepath) as f:
+        reader = json.load(f)
+        return list(reader)
+
+
+def load_csv_data_from_csv(filepath: str) -> List[Dict]:
+    """Load CSV data from a file, with proper error handling."""
+    with open(filepath) as f:
+        reader = csv.reader(f)
+        return list(reader
+======================================================================
+<|bos|>def is_prime(n: int) -> bool:
+    """Check if a number is prime."""
+    if n < 2:
+        return False
+    for i in range(2, int(n ** 0.5) + 1):
+        if n % i == 0:
+            return False
+    return True
+
+
+def prime_factors(n: int) -> list:
+    """Return the prime factors of a number as a list."""
+    factors = []
+    divisor = 2
+    while n > 1:  # n is a number
+        if n % divisor == 0:
+            divisor += 1
+        else:
+            factors.append(n // divisor)
+            n = n % divisor
+    return factors
+
+
+def is_prime_factors(n: int) -> bool:
+    """Check if a number is prime factors of a number."""
+    factors = prime_factors(n)
+    for factor in factors:
+        if is_prime(factor):
+            return True
+    return False
+
+
+def prime_factors(n: int) -> list:
+    """Return the prime factors of a number as a list."""
+    factors = prime_factors(n)
+    factors = [int(x) for x in factors]
+    for i in range(2, int(n ** 0.5) + 1):
+        if n % i == 0:
+            factors.append(i)
+    return factors
+
+
+def is_prime_factors(n: int) -> bool:
+    """Check if a number is prime factors of a number."""
+    factors = prime_factors(n)
+    for factor in factors:
+        if is_prime(factor):
+            return True
+    return False
+
+
+def prime_factors(n: int) -> list:
+    """Return the prime factors of a number as a list."""
+    factors = prime_factors(n)
+    factors = [int(x) for x in factors]
+    for i in range(2, int(n ** 0.5) + 1):
+        if n % i == 0:
+            factors.append(i)
+    return factors
+
+
+def is_prime_factors(n: int) -> bool:
+    """Check if a number is prime factors of a number."""
+    factors = prime_factors(n)
+    for factor in factors:
+        if is_prime(factor):
+            return True
+    return False
+
+
+def prime_factors(n: int) -> list:
+    """Return the prime factors of a number as a list."""
+   
+======================================================================
+<|bos|>import requests
+from typing import Optional, Dict, Any
+
+
+class APIClient:
+    """Simple REST API client with retry logic."""
+    
+    def __init__(self, base_url: str, timeout: int = 30):
+        self.base_url = base_url.rstrip("/")
+        self.session = requests.Session()
+        self.session.headers.update({
+            "User-Agent": "APIClient/1.0",
+            "Accept": "application/json"
+        })
+        self.timeout = timeout
+    
+    def get(self, endpoint: str, params: Optional[Dict] = None) -> Dict[str, Any]:
+        """Send a GET request with error handling."""
+        url = f"{self.base_url}{endpoint}"
+        try:        
+            response = self.session.get(url, params=params)
+        except requests.exceptions.RequestException as e:
+            raise Exception(f"Error {e}")
+        if response.status_code == 401:
+            raise Exception(f"Authentication failed")
+        return response.json()
+
+    def post(self, endpoint: str, data: Dict[str, Any]) -> Dict[str, Any]:
+        """Send a POST request with error handling."""
+        url = f"{self.base_url}{endpoint}"
+        try:        
+            response = self.session.post(url, data=data)
+        except requests.exceptions.RequestException as e:
+            raise Exception(f"Error {e}")
+        if response.status_code == 401:
+            raise Exception(f"Authentication failed")
+        return response.json()
+
+    def put(self, endpoint: str, data: Dict[str, Any]) -> Dict[str, Any]:
+        """Send a PUT request with error handling."""
+        url = f"{self.base_url}{endpoint}"
+        try:        
+            response = self.session.put(url, data=data)
+        except requests.exceptions.RequestException as e:
+            raise Exception(f"Error {e}")
+        if response.status_code == 401:
+            raise Exception(f"Authentication failed")
+        return response.json()
+
+    def delete(self, endpoint: str) -> Dict[str, Any]:
+        """Send a DELETE request with error handling."""
+        url = f"{self.base_url}{endpoint}"
+        try:        
+            response = self.session.delete(url)
+        except requests.exceptions.RequestException as e:
+            raise Exception(f"Error {e}")
+        if response.status_code == 401:
+            raise Exception(f"Authentication failed")
+        return response.json()
+
+    def get_all(self, endpoint: str) -> Dict[str, Any]:
+        """Send a GET request with error handling."""
+        url = f"{self.base_url}{endpoint}"
+        try:        
+            response =
+======================================================================
+<|bos|>import pandas as pd
+import numpy as np
+from typing import List, Dict
+
+
+def clean_and_transform(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Clean a dataframe by:
+    1. Removing duplicate rows
+    2. Filling missing numeric values with median
+    3. Normalizing string columns (strip whitespace, lowercase)
+    4. Removing outliers using IQR method
+    """
+    df = df.copy()
+    
+    # Remove duplicates
+    df = df.drop_duplicates()
+    
+    # Handle missing values
+    numeric_cols = df.select_dtypes(include=[np.number]).columns
+    df = df.dropna(subset=numeric_cols)
+    
+    # Normalize string columns
+    df = df.apply(lambda x: x.apply(lambda x: x.lower().strip()), axis=1)
+    
+    # Remove outliers
+    df = df.dropna(subset=['median'])
+    
+    # Normalize string columns
+    df = df.apply(lambda x: x.apply(lambda x: x.lower().strip()), axis=1)
+    
+    # Remove outliers using IQR method
+    df = df.apply(lambda x: x.apply(lambda x: x.lower().strip()), axis=1)
+    
+    # Normalize string columns
+    df = df.apply(lambda x: x.apply(lambda x: x.lower().strip()), axis=1)
+    
+    # Remove outliers using IQR method
+    df = df.apply(lambda x: x.apply(lambda x: x.lower().strip()), axis=1)
+    
+    # Normalize string columns
+    df = df.apply(lambda x: x.apply(lambda x: x.lower().strip()), axis=1)
+    
+    # Remove outliers using IQR method
+    df = df.apply(lambda x: x.apply(lambda x: x.lower().strip()), axis=1)
+    
+    # Normalize string columns
+    df = df.apply(lambda x: x.apply(lambda x: x.lower().strip()), axis=1)
+    
+    # Remove outliers using IQR method
+    df = df.apply(lambda x: x.apply(lambda x: x.lower().strip()), axis=1)
+    
+    # Normalize string columns
+    df = df.apply(lambda x: x.apply(lambda x: x.lower().strip()), axis=1)
+    
+    # Remove outliers using IQR method
+    df = df.apply(lambda x: x.apply(lambda x: x.lower().strip()), axis=1)
+    
+    # Normalize string columns
+    df = df.apply(lambda x
+======================================================================
+<|bos|>import asyncio
+import aiohttp
+from typing import List, Dict, Any
+
+
+async def fetch_url(session: aiohttp.ClientSession, url: str) -> Dict[str, Any]:
+    """Fetch a URL asynchronously and return JSON response."""
+    async with session.get(url) as response:  # type: ignore
+        return await response.json()
+
+
+async def fetch_json(session: aiohttp.ClientSession, url: str) -> Any:
+    """Fetch a JSON response from a URL asynchronously and return JSON."""
+    async with session.get(url) as response:  # type: ignore
+        return await response.json()
+
+
+async def fetch_json_async(session: aiohttp.ClientSession, url: str) -> Any:
+    """Fetch a JSON response from a URL asynchronously and return JSON."""
+    async with session.get(url) as response:  # type: ignore
+        return await response.json()
+
+
+async def fetch_json_async_async(session: aiohttp.ClientSession, url: str) -> Any:
+    """Fetch a JSON response from a URL asynchronously and return JSON."""
+    async with session.get(url) as response:  # type: ignore
+        return await response.json()
+
+
+async def fetch_json_async_async_async(session: aiohttp.ClientSession, url: str) -> Any:
+    """Fetch a JSON response from a URL asynchronously and return JSON."""
+    async with session.get(url) as response:  # type: ignore
+        return await response.json()
+
+
+async def fetch_json_async_async_async_async(session: aiohttp.ClientSession, url: str) -> Any:
+    """Fetch a JSON response from a URL asynchronously and return JSON."""
+    async with session.get(url) as response:  # type: ignore
+        return await response.json()
+
+
+async def fetch_json_async_async_async_async_async(session: aiohttp.ClientSession, url: str) -> Any:
+    """Fetch a JSON response from a URL asynchronously and return JSON."""
+    async with session.get(url) as response:  # type: ignore
+        return await response.json()
+
+
+async def fetch_json_async_async_async_async_async_async(session: aiohttp.ClientSession, url: str) -> Any:
+    """Fetch a JSON response from a URL asynchronous

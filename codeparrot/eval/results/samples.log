@@ -1,0 +1,160 @@
+2026-07-10 12:23:05,600 - nanochat.common - [32m[1mINFO[0m - Distributed world size: 1
+2026-07-10 12:23:05,600 - nanochat.checkpoint_manager - [32m[1mINFO[0m - Loading model from /home/lzw/.cache/nanochat/base_checkpoints/d12 with step 87000
+2026-07-10 12:23:05,945 - nanochat.checkpoint_manager - [32m[1mINFO[0m - Building model with config: {'sequence_len': 2048, 'vocab_size': 32768, 'n_layer': 12, 'n_head': 6, 'n_kv_head': 6, 'n_embd': 768, 'window_pattern': 'L'}
+✓ Using Flash Attention 2 (NVIDIA CUDA)
+Autodetected device type: cuda
+Evaluating model: base_model (step 87000)
+Eval modes: sample
+
+================================================================================
+Model Samples
+================================================================================
+
+Conditioned samples:
+--------------------------------------------------------------------------------
+<|bos|>The capital of France is the capital of France, and the capital of France is the capital of
+--------------------------------------------------------------------------------
+<|bos|>The chemical symbol of gold is a number between 0 and 9. It is called a chemical
+--------------------------------------------------------------------------------
+<|bos|>If yesterday was Friday, then tomorrow will be 1 day after the next day.
+If yesterday was Satur
+--------------------------------------------------------------------------------
+<|bos|>The opposite of hot is a bit more complicated than it is. It's
+a bit more complicated than
+--------------------------------------------------------------------------------
+<|bos|>The planets of the solar system are: 1) the planets of the solar system, 2) the
+--------------------------------------------------------------------------------
+<|bos|>My favorite color is #FF0000, which is a black color.  This is a
+
+--------------------------------------------------------------------------------
+<|bos|>If 5*x + 3 = 13, then x is 5*x + 3.  The result should be 13. 
+
+Unconditioned samples:
+--------------------------------------------------------------------------------
+<|bos|># Author: Nic Wolfe <nic@wolfeden.ca>
+# URL: http://code.google.com/p/sickbeard/
+#
+# This file is part of SickRage.
+#
+# SickRage is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# SickRage is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A
+--------------------------------------------------------------------------------
+<|bos|>import zipfile
+import os
+import sys
+import time
+import shutil
+import argparse
+import random
+
+try:
+BL crc = '\xF0\x82\x80\xF0\x82\x80\x89\n'.decode('hex').encode('ascii')
+BL END = '\xF0\x82\x80\xF0\x82\x80\x87\n'.decode('hex').encode('ascii')
+BL ENDCR = BL END + '\xEB\x64'  # stacksheet security
+BLCRCR = BL ENDCR + '\xEB\x54'  # stacksheet kernel
+BLN endingCRC =BL END
+--------------------------------------------------------------------------------
+<|bos|>import pvlib as pvlib
+import numpy as np
+import pandas as pd
+import scipy as sp
+from datetime import datetime
+from datetime import timedelta
+from "../Arc_Onset_General_Data import FILENAME_DOSUNBAR02_2750
+
+lfe_vf = 11.366 # apparent vector fuelEs       # um
+vr_vf = 24290 # vacancies source fuelEs  # um
+yrs = 3600 # seconds
+
+hdu = pvlib.Heatmapnaser(outputpath=FILENAME_DOSUNBAR02_
+--------------------------------------------------------------------------------
+<|bos|>#!/usr/bin/env python
+#coding:utf-8
+# Author:  mozAdapter
+# Purpose: cohort-picker
+# Created: 03.04.2010
+# Copyright (C) 2010, Manfred Moitzi
+# License: MIT License
+
+try:
+    import pybr acc
+    from xmu.lib/data import get_calendars
+    XMU = True
+except ImportError:
+    XMU = False
+
+"""
+Links
+``<http://www.allensys.nl/steps2cohort-pricaxzs.php>`` is free software.
+This lic
+--------------------------------------------------------------------------------
+<|bos|>#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+#
+--------------------------------------------------------------------------------
+<|bos|># -*- coding: utf-8 -*-
+import os
+import re
+import socket
+import shutil
+import zipfile
+
+from PyQt4.QtCore import *
+from PyQt4.QtGui import *
+
+
+from lib.orientation import Orientation
+from lib import default_SM_width, default_SM_height, default_SM_radius, default_SM_center
+from lib.util import *
+from lib.resolver import Resolver
+from lib.window import Window
+from lib.s码watcher import S码watcher
+
+
+# friends i o i s的物件待的文件格式 好像所有的文件
+#   (
+--------------------------------------------------------------------------------
+<|bos|># -*- coding: ISO-8859-1 -*-
+# =============================================================================
+# Copyright (c) 2007 Tom Alessi
+#           2013                           (_('EMBL-European Bioinformatica-')
+#                                    2013-03-24  (.esch')
+# Copyright (c) 2013-2019 Tom B ---------------------------------locdicated
+#                2014 Christopher Sán if processo codípis
+#                  2019-01-09. licience Australia
+#               2015 oofx维zen someone
+# Contact:
+--------------------------------------------------------------------------------
+<|bos|># -*- coding: utf-8 -*-
+#
+# gliss documentation build configuration file, created by
+# sphinx-quickstart on Fri Jun  2 13:21:42 2016.
+#
+# This file is execfile()d with the current directory set to its
+# containing dir.
+#
+# Note that not all possible configuration values are present in this
+# autogenerated file.
+#
+# All configuration values have a default; values that are commented out
+# serve to show the default.
+
+# If extensions (or modules to document with autodoc) are in another directory,
+# add these directories to sys.path here. If the

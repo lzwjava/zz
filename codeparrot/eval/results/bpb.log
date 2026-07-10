@@ -1,0 +1,52 @@
+2026-07-10 12:23:03,425 - nanochat.common - [32m[1mINFO[0m - Distributed world size: 1
+2026-07-10 12:23:03,425 - nanochat.checkpoint_manager - [32m[1mINFO[0m - Loading model from /home/lzw/.cache/nanochat/base_checkpoints/d12 with step 87000
+2026-07-10 12:23:03,827 - nanochat.checkpoint_manager - [32m[1mINFO[0m - Building model with config: {'sequence_len': 2048, 'vocab_size': 32768, 'n_layer': 12, 'n_head': 6, 'n_kv_head': 6, 'n_embd': 768, 'window_pattern': 'L'}
+Traceback (most recent call last):
+  File "/home/lzw/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/home/lzw/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/mnt/data/nanochat/scripts/base_eval.py", line 323, in <module>
+    main()
+  File "/mnt/data/nanochat/scripts/base_eval.py", line 274, in main
+    bpb = evaluate_bpb(model, loader, steps, token_bytes)
+  File "/mnt/data/nanochat/.venv/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 120, in decorate_context
+    return func(*args, **kwargs)
+  File "/mnt/data/nanochat/nanochat/loss_eval.py", line 32, in evaluate_bpb
+    x, y = next(batch_iter)
+  File "/mnt/data/nanochat/nanochat/dataloader.py", line 165, in tokenizing_distributed_data_loader_bos_bestfit
+    for inputs, targets, state_dict in tokenizing_distributed_data_loader_with_state_bos_bestfit(*args, **kwargs):
+  File "/mnt/data/nanochat/nanochat/dataloader.py", line 128, in tokenizing_distributed_data_loader_with_state_bos_bestfit
+    refill_buffer()
+  File "/mnt/data/nanochat/nanochat/dataloader.py", line 106, in refill_buffer
+    doc_batch, (pq_idx, rg_idx, epoch) = next(batches)
+  File "/mnt/data/nanochat/nanochat/dataloader.py", line 36, in _document_batches
+    parquet_paths = list_parquet_files(warn_on_legacy=warn_on_legacy)
+  File "/mnt/data/nanochat/nanochat/dataset.py", line 61, in list_parquet_files
+    f for f in os.listdir(data_dir)
+FileNotFoundError: [Errno 2] No such file or directory: '/home/lzw/.cache/nanochat/base_data'
+✓ Using Flash Attention 2 (NVIDIA CUDA)
+Autodetected device type: cuda
+Evaluating model: base_model (step 87000)
+Eval modes: bpb
+
+================================================================================
+BPB Evaluation
+================================================================================
+
+================================================================================
+  WARNING: DATASET UPGRADE REQUIRED
+================================================================================
+
+  Could not find: /home/lzw/.cache/nanochat/base_data_climbmix
+
+  nanochat recently switched from FinewebEdu-100B to ClimbMix-400B.
+  Everyone who does `git pull` as of March 4, 2026 is expected to see this message.
+  To upgrade to the new ClimbMix-400B dataset, run these two commands:
+
+    python -m nanochat.dataset -n 170     # download ~170 shards, enough for GPT-2, adjust as desired
+    python -m scripts.tok_train           # re-train tokenizer on new ClimbMix data
+
+  For now, falling back to your old FinewebEdu-100B dataset...
+================================================================================
+

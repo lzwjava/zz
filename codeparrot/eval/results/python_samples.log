@@ -1,0 +1,175 @@
+2026-07-10 12:23:09,136 - nanochat.checkpoint_manager - [32m[1mINFO[0m - Loading model from /home/lzw/.cache/nanochat/base_checkpoints/d12 with step 87000
+2026-07-10 12:23:09,465 - nanochat.checkpoint_manager - [32m[1mINFO[0m - Building model with config: {'sequence_len': 2048, 'vocab_size': 32768, 'n_layer': 12, 'n_head': 6, 'n_kv_head': 6, 'n_embd': 768, 'window_pattern': 'L'}
+✓ Using Flash Attention 2 (NVIDIA CUDA)
+Device: cuda
+Loaded model step 87000, val_bpb: 0.3723
+======================================================================
+<|bos|>def fibonacci(n): # n is an integer
+    if n == 0:
+        return 1
+    else:
+        return fibonacci(n-1) + fibonacci(n-2)
+
+def fibonacci2(n): # n is an integer
+    if n == 0:
+        return 1
+    else:
+        return fibonacci2(n-1) + fibonacci2(n-2)
+
+def fibonacci3(n): # n is an integer
+    if n == 0:
+        return 1
+    else:
+        return f
+======================================================================
+<|bos|>def reverse_linked_list(head): #reverses the linked list
+    if head == None:
+        return None
+    if head.is_empty():
+        return None
+    if head.is_linked():
+        return head
+    if head.is_linked():
+        return reverse_linked_list(head.next)
+    else:
+        return reverse_linked_list(head.prev)
+
+def reverse_linked_list(head): #reverses the linked list
+    if head == None:
+        return None
+    if head.is_empty():
+        return None
+    if head.is_linked():
+        return head
+    if head.is_linked():
+        return reverse_linked_list(head.next)
+    else:
+        return reverse_linked
+======================================================================
+<|bos|>def sort_dict_by_value(d): # sort by value
+    if isinstance(d, dict):
+        for k, v in d.items():
+            sort_dict_by_value(v)
+    elif isinstance(d, list):
+        for i in range(0, len(d)):
+            sort_dict_by_value(d[i])
+    elif isinstance(d, str):
+        d = d.strip()
+        if d == '':
+            d = 0
+        d = int(d)
+        if d < 0:
+            d = 0
+        if d > 0:
+            d = 1
+        d = d + 1
+        d = d + 1
+        d
+======================================================================
+<|bos|>class Stack: # A stack is a list of elements, which can be added to a stack.
+    def __init__(self):
+        self._stack = []
+        self._stack.append(None)
+
+    def push(self, item):
+        self._stack.append(item)
+
+    def pop(self):
+        return self._stack.pop()
+
+    def peek(self):
+        return self._stack[-1]
+
+    def is_empty(self):
+        return len(self._stack) == 0
+
+    def push_back(self, item):
+        self._stack.append(item)
+
+    def pop_back(self):
+        return self._stack.pop()
+
+    def peek_back(self):
+       
+======================================================================
+<|bos|>import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import matplotlib
+from matplotlib import rcParams
+import matplotlib.patches as mpatches
+import matplotlib.colors as colors
+import matplotlib.cm as cmx
+import matplotlib.animation as animation
+import matplotlib.colors as colors
+import matplotlib.pyplot as plt
+import matplotlib.colors as colors
+import matplotlib.cm as cmx
+import matplotlib.colors as colors
+import matplotlib.cm as cmx
+import matplotlib.cm as cmx
+import matplotlib.cm as cmx
+import matplotlib.cm as cmx
+import matplotlib.cm as cmx
+import matplotlib.cm as cmx
+import matplotlib.cm as cm
+======================================================================
+<|bos|># A function to read a CSV file and return a list of dicts
+# The CSV file is assumed to be in the format:
+# "id, name, age, gender, gender2, age2, gender3, age3, gender4, age4, gender5, age5, gender6, age6, gender7, age7, gender8, age8, gender9, age9, gender10, age10, gender11, age11, gender12, age12, gender13, age13, gender14, age14, gender15, age15, gender16, age16, gender17, age17, gender18, age18, gender19,
+======================================================================
+<|bos|>def is_palindrome(s): # check if string is a palindrome
+    if len(s) == 0:
+        return False
+    if s[0] == s[-1]:
+        return True
+    else:
+        return False
+
+def is_palindrome2(s): # check if string is a palindrome
+    if len(s) == 0:
+        return False
+    if s[0] == s[-1]:
+        return True
+    else:
+        return False
+
+def is_palindrome3(s): # check if string is a palindrome
+    if len(s) == 
+======================================================================
+<|bos|># Binary search implementation
+# https://github.com/lewis/binary-search
+
+# Copyright (c) 2013-2015, Lewis Inc.
+# Licensed under the MIT License (see LICENSE.txt).
+
+import re
+import sys
+import math
+import time
+import random
+import copy
+import itertools
+import operator
+import collections
+import math
+import itertools
+import functools
+import operator
+import itertools
+import collections
+import math
+import functools
+import operator
+import operator
+import collections
+import functools
+import functools
+import operator
+import operator
+import collections
+import math
+import functools
+import functools
+import operator
+
