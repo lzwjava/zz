@@ -1,10 +1,11 @@
-2026-07-10 12:46:42,270 - nanochat.checkpoint_manager - [32m[1mINFO[0m - Loading model from /home/lzw/.cache/nanochat/base_checkpoints/d12 with step 87000
-2026-07-10 12:46:42,605 - nanochat.checkpoint_manager - [32m[1mINFO[0m - Building model with config: {'sequence_len': 2048, 'vocab_size': 32768, 'n_layer': 12, 'n_head': 6, 'n_kv_head': 6, 'n_embd': 768, 'window_pattern': 'L'}
-✓ Using Flash Attention 2 (NVIDIA CUDA)
-Device: cuda
-Loaded model step 87000, val_bpb: 0.3723
-======================================================================
-=== PROMPT (INPUT) ===
+# Codeparrot-d12 Long-Prompt Evaluation
+
+Model: 286M params (depth=12), step 87000, val_bpb: 0.3723
+
+---
+### Sample 1 — PROMPT (INPUT)
+
+```python
 class TreeNode:
     """Binary search tree node implementation."""
     def __init__(self, val=0, left=None, right=None):
@@ -19,7 +20,11 @@ class BinarySearchTree:
         self.root = None
 
     def insert(self, val):
---- MODEL OUTPUT ---
+```
+
+### MODEL OUTPUT
+
+```python
   # insert(val)
         if self.root is None:
             self.root = TreeNode(val)
@@ -77,40 +82,51 @@ class BinarySearchTree:
         if self.root is None:
             return None
        
-======================================================================
-=== PROMPT (INPUT) ===
+```
+
+---
+### Sample 2 — PROMPT (INPUT)
+
+```python
 def longest_common_subsequence(text1: str, text2: str) -> int:
     """
     Compute the length of the longest common subsequence between two strings.
-    
+
     Uses dynamic programming with a 2D table where dp[i][j] represents
     the LCS length for text1[:i] and text2[:j].
-    
+
     Args:
         text1: First input string
         text2: Second input string
-    
+
     Returns:
         Integer length of the longest common subsequence
     """
     m, n = len(text1), len(text2)
     dp = [[0] * (n + 1) for _ in range(m + 1)]
     
---- MODEL OUTPUT ---
+```
+
+### MODEL OUTPUT
+
+```python
  # dp[i][j] represents the LCS length for text1[:i] and text2[:j]
     for i in range(m):
         for j in range(n):
-            dp[i][j] = max(dp[i][j], dp[i][j + 1])
-    return dp[m][n]
+            dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]) + 1
+    return dp[m - 1][n - 1]
 
-def longest_common_subsequence_of_strings(text1: str, text2: str) -> int:
+def longest_common_subsequence_of(text1: str, text2: str) -> int:
     """
     Compute the length of the longest common subsequence between two strings.
-    
+
+    Uses dynamic programming with a 2D table where dp[i][j] represents
+    the LCS length for text1[:i] and text2[:j].
+
     Args:
         text1: First input string
         text2: Second input string
-    
+
     Returns:
         Integer length of the longest common subsequence
     """
@@ -118,30 +134,30 @@ def longest_common_subsequence_of_strings(text1: str, text2: str) -> int:
     dp = [[0] * (n + 1) for _ in range(m + 1)]
     for i in range(m):
         for j in range(n):
-            dp[i][j] = max(dp[i][j], dp[i][j + 1])
-    return dp[m][n]
+            dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]) + 1
+    return dp[m - 1][n - 1]
 
-def longest_common_subsequence_of_strings_of_strings(text1: str, text2: str) -> int:
+def longest_common_subsequence_of2(text1: str, text2: str) -> int:
     """
     Compute the length of the longest common subsequence between two strings.
-    
+
+    Uses dynamic programming with a 2D table where dp[i][j] represents
+    the LCS length for text1[:i] and text2[:j].
+
     Args:
         text1: First input string
         text2: Second input string
-    
+
     Returns:
         Integer length of the longest common subsequence
     """
-    m, n = len(text1), len(text2)
-    dp = [[0] * (n + 1) for _ in range(m + 1)]
-    for i in range(m):
-        for j in range(n):
-            dp[i][j] = max(dp[i][j], dp[i][j + 1])
-    return dp[m][n]
+    m, n = len(text
+```
 
-def longest_common_subsequence_of_strings_of_strings_of_strings(text1: str, text2: str)
-======================================================================
-=== PROMPT (INPUT) ===
+---
+### Sample 3 — PROMPT (INPUT)
+
+```python
 import time
 import functools
 
@@ -150,7 +166,11 @@ def timer_decorator(func):
     """Decorator that prints the execution time of a function."""
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
---- MODEL OUTPUT ---
+```
+
+### MODEL OUTPUT
+
+```python
   # pylint: disable=missing-docstring
         start = time.time()
         result = func(*args, **kwargs)
@@ -204,8 +224,12 @@ def timer_decorator(func):
         result = func(*args, **kwargs)
         end = time.time()
         print("Execution time: %.
-======================================================================
-=== PROMPT (INPUT) ===
+```
+
+---
+### Sample 4 — PROMPT (INPUT)
+
+```python
 import json
 import csv
 from pathlib import Path
@@ -217,7 +241,11 @@ def load_json_data(filepath: str) -> Optional[Dict]:
     try:
         path = Path(filepath)
         if not path.exists():
---- MODEL OUTPUT ---
+```
+
+### MODEL OUTPUT
+
+```python
   # pragma: no cover
             raise FileNotFoundError
         with path.open() as f:
@@ -275,8 +303,12 @@ def load_csv_data_from_csv(filepath: str) -> List[Dict]:
     with open(filepath) as f:
         reader = csv.reader(f)
         return list(reader
-======================================================================
-=== PROMPT (INPUT) ===
+```
+
+---
+### Sample 5 — PROMPT (INPUT)
+
+```python
 def is_prime(n: int) -> bool:
     """Check if a number is prime."""
     if n < 2:
@@ -292,7 +324,11 @@ def prime_factors(n: int) -> list:
     factors = []
     divisor = 2
     while n > 1:
---- MODEL OUTPUT ---
+```
+
+### MODEL OUTPUT
+
+```python
   # n is a number
         if n % divisor == 0:
             divisor += 1
@@ -352,15 +388,19 @@ def is_prime_factors(n: int) -> bool:
 def prime_factors(n: int) -> list:
     """Return the prime factors of a number as a list."""
    
-======================================================================
-=== PROMPT (INPUT) ===
+```
+
+---
+### Sample 6 — PROMPT (INPUT)
+
+```python
 import requests
 from typing import Optional, Dict, Any
 
 
 class APIClient:
     """Simple REST API client with retry logic."""
-    
+
     def __init__(self, base_url: str, timeout: int = 30):
         self.base_url = base_url.rstrip("/")
         self.session = requests.Session()
@@ -369,60 +409,55 @@ class APIClient:
             "Accept": "application/json"
         })
         self.timeout = timeout
-    
+
     def get(self, endpoint: str, params: Optional[Dict] = None) -> Dict[str, Any]:
         """Send a GET request with error handling."""
         url = f"{self.base_url}{endpoint}"
         try:
---- MODEL OUTPUT ---
-        
-            response = self.session.get(url, params=params)
-        except requests.exceptions.RequestException as e:
-            raise Exception(f"Error {e}")
-        if response.status_code == 401:
-            raise Exception(f"Authentication failed")
-        return response.json()
+```
+
+### MODEL OUTPUT
+
+```python
+  # pylint: disable=no-value-for-parameter
+            return self.session.get(url, params=params, timeout=self.timeout)
+        except requests.exceptions.Timeout as e:
+            raise TimeoutError(f"Request to {url} timed out: {e}")
 
     def post(self, endpoint: str, data: Dict[str, Any]) -> Dict[str, Any]:
         """Send a POST request with error handling."""
         url = f"{self.base_url}{endpoint}"
-        try:        
-            response = self.session.post(url, data=data)
-        except requests.exceptions.RequestException as e:
-            raise Exception(f"Error {e}")
-        if response.status_code == 401:
-            raise Exception(f"Authentication failed")
-        return response.json()
+        try:  # pylint: disable=no-value-for-parameter
+            return self.session.post(url, data=data, timeout=self.timeout)
+        except requests.exceptions.Timeout as e:
+            raise TimeoutError(f"Request to {url} timed out: {e}")
 
     def put(self, endpoint: str, data: Dict[str, Any]) -> Dict[str, Any]:
         """Send a PUT request with error handling."""
         url = f"{self.base_url}{endpoint}"
-        try:        
-            response = self.session.put(url, data=data)
-        except requests.exceptions.RequestException as e:
-            raise Exception(f"Error {e}")
-        if response.status_code == 401:
-            raise Exception(f"Authentication failed")
-        return response.json()
+        try:  # pylint: disable=no-value-for-parameter
+            return self.session.put(url, data=data, timeout=self.timeout)
+        except requests.exceptions.Timeout as e:
+            raise TimeoutError(f"Request to {url} timed out: {e}")
 
     def delete(self, endpoint: str) -> Dict[str, Any]:
         """Send a DELETE request with error handling."""
         url = f"{self.base_url}{endpoint}"
-        try:        
-            response = self.session.delete(url)
-        except requests.exceptions.RequestException as e:
-            raise Exception(f"Error {e}")
-        if response.status_code == 401:
-            raise Exception(f"Authentication failed")
-        return response.json()
+        try:  # pylint: disable=no-value-for-parameter
+            return self.session.delete(url, timeout=self.timeout)
+        except requests.exceptions.Timeout as e:
+            raise TimeoutError(f"Request to {url} timed out: {e}")
 
-    def get_all(self, endpoint: str) -> Dict[str, Any]:
-        """Send a GET request with error handling."""
+    def patch(self, endpoint: str, data: Dict[str, Any]) -> Dict[str, Any]:
+        """Send a PATCH request with error handling."""
         url = f"{self.base_url}{endpoint}"
-        try:        
-            response =
-======================================================================
-=== PROMPT (INPUT) ===
+        try:  # pylint: disable
+```
+
+---
+### Sample 7 — PROMPT (INPUT)
+
+```python
 import pandas as pd
 import numpy as np
 from typing import List, Dict
@@ -437,56 +472,55 @@ def clean_and_transform(df: pd.DataFrame) -> pd.DataFrame:
     4. Removing outliers using IQR method
     """
     df = df.copy()
-    
+
     # Remove duplicates
     df = df.drop_duplicates()
-    
+
     # Handle missing values
     numeric_cols = df.select_dtypes(include=[np.number]).columns
---- MODEL OUTPUT ---
+```
+
+### MODEL OUTPUT
+
+```python
 
     df = df.dropna(subset=numeric_cols)
-    
+
     # Normalize string columns
-    df = df.apply(lambda x: x.apply(lambda x: x.lower().strip()), axis=1)
-    
+    df = df.apply(lambda x: x.lower().strip())
+
     # Remove outliers
-    df = df.dropna(subset=['median'])
-    
-    # Normalize string columns
-    df = df.apply(lambda x: x.apply(lambda x: x.lower().strip()), axis=1)
-    
-    # Remove outliers using IQR method
-    df = df.apply(lambda x: x.apply(lambda x: x.lower().strip()), axis=1)
-    
-    # Normalize string columns
-    df = df.apply(lambda x: x.apply(lambda x: x.lower().strip()), axis=1)
-    
-    # Remove outliers using IQR method
-    df = df.apply(lambda x: x.apply(lambda x: x.lower().strip()), axis=1)
-    
-    # Normalize string columns
-    df = df.apply(lambda x: x.apply(lambda x: x.lower().strip()), axis=1)
-    
-    # Remove outliers using IQR method
-    df = df.apply(lambda x: x.apply(lambda x: x.lower().strip()), axis=1)
-    
-    # Normalize string columns
-    df = df.apply(lambda x: x.apply(lambda x: x.lower().strip()), axis=1)
-    
-    # Remove outliers using IQR method
-    df = df.apply(lambda x: x.apply(lambda x: x.lower().strip()), axis=1)
-    
-    # Normalize string columns
-    df = df.apply(lambda x: x.apply(lambda x: x.lower().strip()), axis=1)
-    
-    # Remove outliers using IQR method
-    df = df.apply(lambda x: x.apply(lambda x: x.lower().strip()), axis=1)
-    
-    # Normalize string columns
-    df = df.apply(lambda x
-======================================================================
-=== PROMPT (INPUT) ===
+    df = df.dropna(subset=['median', 'mean', 'std', 'var', 'median', 'mean', 'std', 'var', 'median', 'mean', 'std', 'var'])
+
+    # Remove non-NA values
+    df = df.dropna(subset=['median', 'mean', 'std', 'var', 'median', 'mean', 'std', 'var'])
+
+    # Remove columns with missing values
+    df = df.dropna(subset=['median', 'mean', 'std', 'var', 'median', 'mean', 'std', 'var'])
+
+    # Remove columns with outliers
+    df = df.dropna(subset=['median', 'mean', 'std', 'var', 'median', 'mean', 'std', 'var'])
+
+    # Remove columns with non-numeric values
+    df = df.dropna(subset=['median', 'mean', 'std', 'var', 'median', 'mean', 'std', 'var'])
+
+    # Remove columns with non-numeric values
+    df = df.dropna(subset=['median', 'mean', 'std', 'var', 'median', 'mean', 'std', 'var'])
+
+    # Remove columns with non-numeric values
+    df = df.dropna(subset=['median', 'mean', 'std', 'var', 'median', 'mean', 'std', 'var'])
+
+    # Remove columns with non-numeric values
+    df = df.dropna(subset=['median', 'mean', 'std', 'var', 'median', 'mean', 'std', 'var'])
+
+    # Remove columns with non-numeric values
+    df = df
+```
+
+---
+### Sample 8 — PROMPT (INPUT)
+
+```python
 import asyncio
 import aiohttp
 from typing import List, Dict, Any
@@ -495,7 +529,11 @@ from typing import List, Dict, Any
 async def fetch_url(session: aiohttp.ClientSession, url: str) -> Dict[str, Any]:
     """Fetch a URL asynchronously and return JSON response."""
     async with session.get(url) as response:
---- MODEL OUTPUT ---
+```
+
+### MODEL OUTPUT
+
+```python
   # type: ignore
         return await response.json()
 
@@ -538,3 +576,5 @@ async def fetch_json_async_async_async_async_async(session: aiohttp.ClientSessio
 
 async def fetch_json_async_async_async_async_async_async(session: aiohttp.ClientSession, url: str) -> Any:
     """Fetch a JSON response from a URL asynchronous
+```
+
