@@ -164,14 +164,17 @@ async def fetch_url(session: aiohttp.ClientSession, url: str) -> Dict[str, Any]:
 
 for prompt in prompts:
     tokens = tokenizer(prompt, prepend='<|bos|>')
-    # Use lower temperature for more deterministic continuation
+    prompt_len = len(tokens)  # number of prompt tokens (BOS + prompt)
     sample, _ = engine.generate_batch(tokens, num_samples=1, max_tokens=384, temperature=0.3)
-    sample_str = tokenizer.decode(sample[0])
+    generated_tokens = sample[0][prompt_len:]
+    generated_str = tokenizer.decode(generated_tokens)
     print('=' * 70)
-    print(sample_str)
+    print('=== PROMPT (INPUT) ===')
+    print(prompt)
+    print('--- MODEL OUTPUT ---')
+    print(generated_str)
 " 2>&1 | tee "$RESULTS_DIR/long_prompt_results.log"
 
 echo ""
 echo "=== Done ==="
 echo "Results: $RESULTS_DIR/long_prompt_results.log"
-"

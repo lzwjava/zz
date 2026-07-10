@@ -1,10 +1,11 @@
-2026-07-10 12:38:17,326 - nanochat.checkpoint_manager - [32m[1mINFO[0m - Loading model from /home/lzw/.cache/nanochat/base_checkpoints/d12 with step 87000
-2026-07-10 12:38:17,663 - nanochat.checkpoint_manager - [32m[1mINFO[0m - Building model with config: {'sequence_len': 2048, 'vocab_size': 32768, 'n_layer': 12, 'n_head': 6, 'n_kv_head': 6, 'n_embd': 768, 'window_pattern': 'L'}
+2026-07-10 12:46:42,270 - nanochat.checkpoint_manager - [32m[1mINFO[0m - Loading model from /home/lzw/.cache/nanochat/base_checkpoints/d12 with step 87000
+2026-07-10 12:46:42,605 - nanochat.checkpoint_manager - [32m[1mINFO[0m - Building model with config: {'sequence_len': 2048, 'vocab_size': 32768, 'n_layer': 12, 'n_head': 6, 'n_kv_head': 6, 'n_embd': 768, 'window_pattern': 'L'}
 ✓ Using Flash Attention 2 (NVIDIA CUDA)
 Device: cuda
 Loaded model step 87000, val_bpb: 0.3723
 ======================================================================
-<|bos|>class TreeNode:
+=== PROMPT (INPUT) ===
+class TreeNode:
     """Binary search tree node implementation."""
     def __init__(self, val=0, left=None, right=None):
         self.val = val
@@ -17,7 +18,9 @@ class BinarySearchTree:
     def __init__(self):
         self.root = None
 
-    def insert(self, val):  # insert(val)
+    def insert(self, val):
+--- MODEL OUTPUT ---
+  # insert(val)
         if self.root is None:
             self.root = TreeNode(val)
         else:
@@ -75,7 +78,8 @@ class BinarySearchTree:
             return None
        
 ======================================================================
-<|bos|>def longest_common_subsequence(text1: str, text2: str) -> int:
+=== PROMPT (INPUT) ===
+def longest_common_subsequence(text1: str, text2: str) -> int:
     """
     Compute the length of the longest common subsequence between two strings.
     
@@ -91,7 +95,9 @@ class BinarySearchTree:
     """
     m, n = len(text1), len(text2)
     dp = [[0] * (n + 1) for _ in range(m + 1)]
-     # dp[i][j] represents the LCS length for text1[:i] and text2[:j]
+    
+--- MODEL OUTPUT ---
+ # dp[i][j] represents the LCS length for text1[:i] and text2[:j]
     for i in range(m):
         for j in range(n):
             dp[i][j] = max(dp[i][j], dp[i][j + 1])
@@ -135,14 +141,17 @@ def longest_common_subsequence_of_strings_of_strings(text1: str, text2: str) -> 
 
 def longest_common_subsequence_of_strings_of_strings_of_strings(text1: str, text2: str)
 ======================================================================
-<|bos|>import time
+=== PROMPT (INPUT) ===
+import time
 import functools
 
 
 def timer_decorator(func):
     """Decorator that prints the execution time of a function."""
     @functools.wraps(func)
-    def wrapper(*args, **kwargs):  # pylint: disable=missing-docstring
+    def wrapper(*args, **kwargs):
+--- MODEL OUTPUT ---
+  # pylint: disable=missing-docstring
         start = time.time()
         result = func(*args, **kwargs)
         end = time.time()
@@ -196,7 +205,8 @@ def timer_decorator(func):
         end = time.time()
         print("Execution time: %.
 ======================================================================
-<|bos|>import json
+=== PROMPT (INPUT) ===
+import json
 import csv
 from pathlib import Path
 from typing import List, Dict, Optional
@@ -206,7 +216,9 @@ def load_json_data(filepath: str) -> Optional[Dict]:
     """Load JSON data from a file, with proper error handling."""
     try:
         path = Path(filepath)
-        if not path.exists():  # pragma: no cover
+        if not path.exists():
+--- MODEL OUTPUT ---
+  # pragma: no cover
             raise FileNotFoundError
         with path.open() as f:
             return json.load(f)
@@ -264,7 +276,8 @@ def load_csv_data_from_csv(filepath: str) -> List[Dict]:
         reader = csv.reader(f)
         return list(reader
 ======================================================================
-<|bos|>def is_prime(n: int) -> bool:
+=== PROMPT (INPUT) ===
+def is_prime(n: int) -> bool:
     """Check if a number is prime."""
     if n < 2:
         return False
@@ -278,7 +291,9 @@ def prime_factors(n: int) -> list:
     """Return the prime factors of a number as a list."""
     factors = []
     divisor = 2
-    while n > 1:  # n is a number
+    while n > 1:
+--- MODEL OUTPUT ---
+  # n is a number
         if n % divisor == 0:
             divisor += 1
         else:
@@ -338,7 +353,8 @@ def prime_factors(n: int) -> list:
     """Return the prime factors of a number as a list."""
    
 ======================================================================
-<|bos|>import requests
+=== PROMPT (INPUT) ===
+import requests
 from typing import Optional, Dict, Any
 
 
@@ -357,7 +373,9 @@ class APIClient:
     def get(self, endpoint: str, params: Optional[Dict] = None) -> Dict[str, Any]:
         """Send a GET request with error handling."""
         url = f"{self.base_url}{endpoint}"
-        try:        
+        try:
+--- MODEL OUTPUT ---
+        
             response = self.session.get(url, params=params)
         except requests.exceptions.RequestException as e:
             raise Exception(f"Error {e}")
@@ -404,7 +422,8 @@ class APIClient:
         try:        
             response =
 ======================================================================
-<|bos|>import pandas as pd
+=== PROMPT (INPUT) ===
+import pandas as pd
 import numpy as np
 from typing import List, Dict
 
@@ -424,6 +443,8 @@ def clean_and_transform(df: pd.DataFrame) -> pd.DataFrame:
     
     # Handle missing values
     numeric_cols = df.select_dtypes(include=[np.number]).columns
+--- MODEL OUTPUT ---
+
     df = df.dropna(subset=numeric_cols)
     
     # Normalize string columns
@@ -465,14 +486,17 @@ def clean_and_transform(df: pd.DataFrame) -> pd.DataFrame:
     # Normalize string columns
     df = df.apply(lambda x
 ======================================================================
-<|bos|>import asyncio
+=== PROMPT (INPUT) ===
+import asyncio
 import aiohttp
 from typing import List, Dict, Any
 
 
 async def fetch_url(session: aiohttp.ClientSession, url: str) -> Dict[str, Any]:
     """Fetch a URL asynchronously and return JSON response."""
-    async with session.get(url) as response:  # type: ignore
+    async with session.get(url) as response:
+--- MODEL OUTPUT ---
+  # type: ignore
         return await response.json()
 
 
