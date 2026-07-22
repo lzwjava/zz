@@ -2,7 +2,7 @@
 #
 # run.sh — Generate images with FLUX.1-schnell Q4_0 via stable-diffusion.cpp
 #
-# Uses the pre-built sd-cli binary and models already in ./models/
+# Uses the pre-built sd-cli binary (CUDA-enabled) and models in ./models/
 #
 # Usage:
 #   ./run.sh "a serene mountain lake at sunset"
@@ -29,7 +29,8 @@ DEFAULT_PROMPT="a majestic dragon perched on a medieval castle tower, fantasy ar
 
 if [ ! -f "${SD_CLI}" ]; then
     echo "ERROR: sd-cli binary not found at ${SD_CLI}"
-    echo "Build it first or check the path."
+    echo "Rebuild with CUDA first:"
+    echo "  cd sd_cpp && cmake -S . -B build -DSD_CUDA=ON && cmake --build build -j"
     exit 1
 fi
 
@@ -51,7 +52,7 @@ TIMESTAMP="$(date +%Y%m%d_%H%M%S)"
 OUTPUT="${OUTPUT_DIR}/flux_${TIMESTAMP}.png"
 
 echo "========================================"
-echo " FLUX.1-schnell Q4_0 — Image Generator"
+echo " FLUX.1-schnell Q4_0 — GPU Accelerated"
 echo "========================================"
 echo " Model:  ${MODEL}"
 echo " VAE:    ${VAE}"
@@ -62,6 +63,21 @@ echo " Output: ${OUTPUT}"
 echo "========================================"
 echo ""
 
+# Run with CUDA backend on RTX 4070
+#   --backend diffusion=cuda    Flux transformer on GPU
+#   --backend vae=cuda          VAE on GPU (with --vae-tiling to fit VRAM)
+#   --backend clip=cpu          CLIP on CPU (tiny, negligible impact)
+#   --backend t5xxl=cpu         T5 on CPU (file may have corrupt tensors)
+#   --vae-tiling                Splits VAE decode into tiles (416 MB vs 6.6 GB!)
+#   --max-vram 10               Leaves headroom for display etc.
+#
+# Performance breakdown (RTX 4070, 1024x1024, 4 steps):
+#   Flux diffusion:  ~12.8s  (GPU)
+#   VAE decode:       ~2.7s  (GPU, tiled)
+#   Text encoding:    ~0.3s  (CPU)
+#   Total:           ~16s    (vs 526s on CPU-only = 33x speedup)
+#
+# Note: T5XXL "data offsets out of bounds" error — re-download to fix.
 "${SD_CLI}" \
     --diffusion-model "${MODEL}" \
     --vae "${VAE}" \
@@ -75,7 +91,9 @@ echo ""
     --height 1024 \
     --seed 42 \
     --output "${OUTPUT}" \
-    --clip-on-cpu \
+    --backend "diffusion=cuda,clip=cpu,vae=cuda,t5xxl=cpu" \
+    --vae-tiling \
+    --max-vram 10 \
     --verbose \
     "$@"
 
