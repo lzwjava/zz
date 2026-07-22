@@ -56,3 +56,7 @@ finetune/lzw-notes-merged
 
 # Training checkpoints
 spgispeech/checkpoints/
+
+# Flux models and build artifacts
+flux/models/
+flux/sd_cpp/
