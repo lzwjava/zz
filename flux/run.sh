@@ -23,6 +23,19 @@ VAE="${MODEL_DIR}/ae.safetensors"
 CLIP_L="${MODEL_DIR}/clip_l.safetensors"
 T5XXL="${MODEL_DIR}/t5xxl_fp16.safetensors"
 
+# --- VRAM-aware defaults ---
+# The desktop (Xorg + Chromium + Slack + editors) holds ~2.9 GB of the 12 GB
+# RTX 4070, leaving only ~8.9 GB usable for CUDA. FLUX Q4_0 needs 6.4 GB of
+# weights + ~2.35 GB compute buffer + overhead -> only 768x768 fits reliably.
+# For 1024x1024, free up VRAM first (close Chromium/Slack), then run:
+#   WIDTH=1024 HEIGHT=1024 ./run.sh "prompt"
+# (Attention memory scales with resolution, so 512x512 also fits comfortably.)
+WIDTH="${WIDTH:-768}"
+HEIGHT="${HEIGHT:-768}"
+STEPS="${STEPS:-4}"
+MAX_VRAM="${MAX_VRAM:-10}"
+SEED="${SEED:-42}"
+
 DEFAULT_PROMPT="a majestic dragon perched on a medieval castle tower, fantasy art style"
 
 # --- Check prerequisites ---
@@ -67,17 +80,15 @@ echo ""
 #   --backend diffusion=cuda    Flux transformer on GPU
 #   --backend vae=cuda          VAE on GPU (with --vae-tiling to fit VRAM)
 #   --backend clip=cpu          CLIP on CPU (tiny, negligible impact)
-#   --backend t5xxl=cpu         T5 on CPU (file may have corrupt tensors)
+#   --backend t5xxl=cpu         T5 on CPU (re-downloaded from comfy mirror to fix corrupt file)
 #   --vae-tiling                Splits VAE decode into tiles (416 MB vs 6.6 GB!)
-#   --max-vram 10               Leaves headroom for display etc.
+#   --max-vram ${MAX_VRAM}      VRAM budget (default 10 = headroom for desktop)
 #
 # Performance breakdown (RTX 4070, 1024x1024, 4 steps):
 #   Flux diffusion:  ~12.8s  (GPU)
 #   VAE decode:       ~2.7s  (GPU, tiled)
 #   Text encoding:    ~0.3s  (CPU)
 #   Total:           ~16s    (vs 526s on CPU-only = 33x speedup)
-#
-# Note: T5XXL "data offsets out of bounds" error — re-download to fix.
 "${SD_CLI}" \
     --diffusion-model "${MODEL}" \
     --vae "${VAE}" \
@@ -86,14 +97,14 @@ echo ""
     --prompt "${PROMPT}" \
     --cfg-scale 1.0 \
     --sampling-method euler \
-    --steps 4 \
-    --width 1024 \
-    --height 1024 \
-    --seed 42 \
+    --steps "${STEPS}" \
+    --width "${WIDTH}" \
+    --height "${HEIGHT}" \
+    --seed "${SEED}" \
     --output "${OUTPUT}" \
     --backend "diffusion=cuda,clip=cpu,vae=cuda,t5xxl=cpu" \
     --vae-tiling \
-    --max-vram 10 \
+    --max-vram "${MAX_VRAM}" \
     --verbose \
     "$@"
 
