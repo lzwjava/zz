@@ -58,22 +58,83 @@ def build_prompt(problem: str) -> str:
 # --------------------------------------------------------------------------------------
 
 
-def make_synthetic(n: int = 800, seed: int = 42) -> list[dict[str, str]]:
-    """Arithmetic with three difficulty levels. Answers are computed without eval()."""
+def _standard_problem(rng: random.Random) -> tuple[str, int]:
+    """One problem from the original three-tier mix."""
+    level = rng.choice(["easy", "medium", "hard"])
+    if level == "easy":
+        a, b = rng.randint(1, 20), rng.randint(1, 20)
+        return f"{a} + {b} = ?", a + b
+    if level == "medium":
+        a, b, c = rng.randint(1, 15), rng.randint(1, 10), rng.randint(1, 5)
+        return f"{a} * {b} + {c} = ?", a * b + c
+    a, b, c = rng.randint(2, 12), rng.randint(2, 8), rng.randint(1, 10)
+    return f"({a} + {b}) * {c} = ?", (a + b) * c
+
+
+def _harder_problem(rng: random.Random) -> tuple[str, int]:
+    """Deliberately out of reach for a 1.5B base model's greedy accuracy.
+
+    Measured with eval_grpo_adapter.py --mode ood: the untouched base model already
+    solves ~83% of the 'standard' mix, so GRPO has almost no headroom there and the
+    reward saturates (zero-variance groups) within one epoch.
+    """
+    kind = rng.choice(["add3", "mul2", "mixed3", "twoterm", "sub3"])
+    if kind == "add3":          # 3-digit addition with carry
+        a, b = rng.randint(120, 900), rng.randint(120, 900)
+        return f"{a} + {b} = ?", a + b
+    if kind == "mul2":          # 2-digit x 2-digit
+        a, b = rng.randint(12, 99), rng.randint(12, 99)
+        return f"{a} * {b} = ?", a * b
+    if kind == "mixed3":        # (a + b) * c with large a, b
+        a, b, c = rng.randint(20, 99), rng.randint(20, 99), rng.randint(3, 12)
+        return f"({a} + {b}) * {c} = ?", (a + b) * c
+    if kind == "twoterm":       # a * b + c * d, needs two intermediate products
+        a, b, c, d = (rng.randint(2, 12) for _ in range(4))
+        return f"{a} * {b} + {c} * {d} = ?", a * b + c * d
+    a = rng.randint(300, 999)
+    b = rng.randint(100, a)     # 3-digit subtraction, never negative
+    return f"{a} - {b} = ?", a - b
+
+
+def make_synthetic(n: int = 800, seed: int = 42, difficulty: str = "standard") -> list[dict[str, str]]:
+    """Arithmetic problems. Answers are computed without eval().
+
+    difficulty='standard' -> the original 1-2 digit mix (base model already ~83%).
+    difficulty='harder'   -> 3-digit / 2-digit-product tier the base model finds hard.
+    """
+    if difficulty not in ("standard", "harder"):
+        raise ValueError(f"unknown difficulty: {difficulty}")
+    gen = _standard_problem if difficulty == "standard" else _harder_problem
     rng = random.Random(seed)
     rows: list[dict[str, str]] = []
     for _ in range(n):
-        level = rng.choice(["easy", "medium", "hard"])
-        if level == "easy":
-            a, b = rng.randint(1, 20), rng.randint(1, 20)
-            problem, answer = f"{a} + {b} = ?", a + b
-        elif level == "medium":
-            a, b, c = rng.randint(1, 15), rng.randint(1, 10), rng.randint(1, 5)
-            problem, answer = f"{a} * {b} + {c} = ?", a * b + c
-        else:
-            a, b, c = rng.randint(2, 12), rng.randint(2, 8), rng.randint(1, 10)
-            problem, answer = f"({a} + {b}) * {c} = ?", (a + b) * c
+        problem, answer = gen(rng)
         rows.append({"prompt": build_prompt(problem), "answer": str(answer)})
+    return rows
+
+
+def make_format_examples(n: int = 256, seed: int = 123) -> list[tuple[str, str]]:
+    """(prompt, completion) pairs that demonstrate the <think>...</think> protocol.
+
+    The arithmetic is trivially easy on purpose: the supervised warmup should teach the
+    *format* only, leaving the actual reasoning to GRPO. Without this bootstrap the
+    tag-shaping reward is an unreachable rare event -- in the first run
+    rewards/reward_format/mean was 0.0 for all 760 steps and 0/64 final generations
+    contained a well-formed block.
+    """
+    rng = random.Random(seed)
+    rows: list[tuple[str, str]] = []
+    for _ in range(n):
+        a, b = rng.randint(1, 9), rng.randint(1, 9)
+        total = a + b
+        completion = (
+            f"<think>\n"
+            f"I need to add {a} and {b}.\n"
+            f"{a} + {b} = {total}\n"
+            f"</think>\n"
+            f"The final answer is {total}."
+        )
+        rows.append((build_prompt(f"{a} + {b} = ?"), completion))
     return rows
 
 
@@ -89,9 +150,9 @@ def make_gsm8k(split: str, n: int | None) -> list[dict[str, str]]:
     return rows
 
 
-def build_dataset(name: str, eval_size: int, smoke: bool) -> DatasetDict:
+def build_dataset(name: str, eval_size: int, smoke: bool, difficulty: str = "standard") -> DatasetDict:
     if name == "synthetic":
-        rows = make_synthetic(n=64 if smoke else 800)
+        rows = make_synthetic(n=64 if smoke else 800, difficulty=difficulty)
         split = Dataset.from_list(rows).train_test_split(
             test_size=max(0.05, eval_size / len(rows)), seed=42
         )
@@ -118,9 +179,20 @@ def _to_text(completion: Any) -> str:
 
 
 def _extract_answer(text: str) -> str | None:
-    """Prefer the number after </think>; fall back to the last number in the text."""
+    """Prefer the number after </think>; fall back to the last number in the text.
+
+    The fallback matters: a base model often emits a stray trailing </think> with no
+    number after it, and the naive 'split on </think> and take the tail' rule then
+    discards a perfectly correct answer, charging it the -0.7 'no answer' penalty.
+    Measured on the untouched base model (48 greedy in-distribution prompts) *all* of
+    its failures were this artefact, not arithmetic mistakes -- i.e. the original run's
+    headline gain was largely 'learned to stop emitting a stray tag'. Tag hygiene is
+    already what reward_format is for, so correctness gets the number either way.
+    """
     after = text.split("</think>")[-1] if "</think>" in text else text
     nums = re.findall(r"-?\d+(?:\.\d+)?", after)
+    if not nums and "</think>" in text:
+        nums = re.findall(r"-?\d+(?:\.\d+)?", text)  # stray/unclosed tag: rescue the answer
     if not nums:
         return None
     try:
@@ -221,6 +293,71 @@ def load_model_and_tokenizer(args):
 # --------------------------------------------------------------------------------------
 
 
+def run_format_warmup(model, tokenizer, args) -> None:
+    """Supervised bootstrap on <think> examples, before any RL.
+
+    Deliberately a hand-rolled loop rather than SFTTrainer so it behaves identically
+    across TRL versions. Loss is masked to the completion: the model must learn to
+    *produce* the protocol, not to predict the prompt.
+    """
+    rows = make_format_examples(args.format_warmup, seed=args.seed)
+    params = [p for p in model.parameters() if p.requires_grad]
+    opt = torch.optim.AdamW(params, lr=args.warmup_lr)
+    device = next(model.parameters()).device
+    pad_id = tokenizer.pad_token_id
+    bs = args.per_device_batch_size
+
+    print(f"[warmup] supervised format warmup: {len(rows)} examples, "
+          f"{len(params)} tensors, lr={args.warmup_lr}")
+    before = format_reward_of(model, tokenizer, rows, n=8)
+
+    model.train()
+    running, seen = 0.0, 0
+    for start in range(0, len(rows), bs):
+        batch = rows[start : start + bs]
+        input_ids, labels = [], []
+        for prompt, completion in batch:
+            pids = tokenizer(prompt, add_special_tokens=False)["input_ids"]
+            cids = tokenizer(completion, add_special_tokens=False)["input_ids"] + [tokenizer.eos_token_id]
+            input_ids.append(pids + cids)
+            labels.append([-100] * len(pids) + cids)
+        width = max(len(x) for x in input_ids)
+        attn = [[1] * len(x) + [0] * (width - len(x)) for x in input_ids]
+        input_ids = [x + [pad_id] * (width - len(x)) for x in input_ids]
+        labels = [x + [-100] * (width - len(x)) for x in labels]
+        to = lambda v: torch.tensor(v, device=device)  # noqa: E731
+        out = model(input_ids=to(input_ids), attention_mask=to(attn), labels=to(labels))
+        out.loss.backward()
+        opt.step()
+        opt.zero_grad()
+        running += out.loss.item()
+        seen += 1
+        if seen % 20 == 0 or start == 0:
+            print(f"[warmup] step {seen}/{len(rows) // bs} loss={running / seen:.4f}")
+    model.eval()
+
+    after = format_reward_of(model, tokenizer, rows, n=8)
+    print(f"[warmup] format reward {before:.2f} -> {after:.2f} (max 0.3)")
+    if after < 0.25:
+        print("[warmup] WARNING: the model still is not reliably closing </think>; "
+              "expect rewards/reward_format to stay near zero.")
+
+
+def format_reward_of(model, tokenizer, rows, n: int = 8) -> float:
+    """Mean reward_format over n held-in examples -- a quick go/no-go for the warmup."""
+    model.eval()
+    prompts = [p for p, _ in rows[:n]]
+    completions = []
+    for prompt in prompts:
+        ids = tokenizer(prompt, return_tensors="pt").to(next(model.parameters()).device)
+        with torch.no_grad():
+            out = model.generate(
+                **ids, max_new_tokens=128, do_sample=False, pad_token_id=tokenizer.pad_token_id
+            )
+        completions.append(tokenizer.decode(out[0][ids["input_ids"].shape[1]:], skip_special_tokens=True))
+    return sum(reward_format(completions)) / len(completions)
+
+
 def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
 
@@ -228,6 +365,12 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--model", default="Qwen/Qwen2.5-1.5B",
                    help="BASE checkpoint (no -Instruct suffix!), e.g. Qwen/Qwen2.5-3B")
     p.add_argument("--dataset", default="synthetic", choices=["synthetic", "gsm8k"])
+    p.add_argument("--difficulty", default="standard", choices=["standard", "harder"],
+                   help="synthetic tier; 'harder' gives the reward room to move")
+    p.add_argument("--format-warmup", type=int, default=0, metavar="N",
+                   help="supervised steps on N <think>-format examples before GRPO "
+                        "(0 = off). Without it the tag reward is unreachable for a base model.")
+    p.add_argument("--warmup-lr", type=float, default=1e-4, help="LR for the format warmup")
     p.add_argument("--output-dir", default="./grpo_qwen15b_math")
     p.add_argument("--eval-size", type=int, default=16)
     p.add_argument("--seed", type=int, default=42)
@@ -278,11 +421,24 @@ def main() -> None:
     print(f"GPU: {torch.cuda.get_device_name(0)} "
           f"({torch.cuda.get_device_properties(0).total_memory / 1024**3:.1f} GB)")
 
-    data = build_dataset(args.dataset, args.eval_size, args.smoke)
-    print(f"Dataset '{args.dataset}': train={len(data['train'])} eval={len(data['test'])}")
+    data = build_dataset(args.dataset, args.eval_size, args.smoke, args.difficulty)
+    print(f"Dataset '{args.dataset}' ({args.difficulty}): "
+          f"train={len(data['train'])} eval={len(data['test'])}")
     print(f"Example prompt:\n{data['train'][0]['prompt']!r}\n gold={data['train'][0]['answer']}")
 
     model, tokenizer = load_model_and_tokenizer(args)
+
+    if args.format_warmup:
+        run_format_warmup(model, tokenizer, args)
+
+    # load_best_model_at_end requires the two strategies to be aligned; both are 'steps'
+    # with the same cadence by default. The first run kept step 760 even though step 725
+    # was the best eval (0.965 vs 0.924) because this was never enabled.
+    eval_enabled = args.eval_steps < 10_000
+    keep_best = eval_enabled and args.eval_steps == args.save_steps
+    if eval_enabled and not keep_best:
+        print(f"[warn] eval_steps={args.eval_steps} != save_steps={args.save_steps}; "
+              "not tracking the best checkpoint")
 
     grpo_args = GRPOConfig(
         output_dir=args.output_dir,
@@ -312,6 +468,9 @@ def main() -> None:
         save_total_limit=2,
         report_to="wandb" if args.wandb else "none",
         run_name=os.path.basename(args.output_dir),
+        load_best_model_at_end=keep_best,
+        metric_for_best_model="eval_reward" if keep_best else None,
+        greater_is_better=True,
         seed=args.seed,
     )
 
@@ -326,7 +485,8 @@ def main() -> None:
 
     print("=" * 72)
     print(f"model        : {args.model}  (base, 4-bit={args.load_in_4bit}, LoRA r={args.lora_r})")
-    print(f"task         : math reasoning via GRPO from {args.dataset}")
+    print(f"task         : math reasoning via GRPO from {args.dataset} ({args.difficulty})")
+    print(f"format warmup: {args.format_warmup or 'off'}")
     print(f"G / batch    : {args.num_generations} generations x "
           f"{args.per_device_batch_size * args.grad_accum} prompts per step")
     print(f"output       : {args.output_dir}")
