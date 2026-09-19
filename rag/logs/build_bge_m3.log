@@ -1,0 +1,84 @@
+Model:      BAAI/bge-m3
+Output:     /mnt/data/zz/rag/rag_index
+Chunking:   900 chars / 150 overlap
+
+Loading corpus...
+  [en] loaded 14504 posts
+  [zh] loaded 14503 posts
+
+Total chunks: 186,263
+  by lang: en=108,533, zh=77,730
+  avg chunk: 458 chars
+
+Loading encoder (BAAI/bge-m3)...
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights: 100%|██████████| 391/391 [00:00<00:00, 63909.16it/s]
+  dim=1024, device=cuda:0
+Embedding chunks...
+  embedded 32/186,263 chunks (66/s, ETA 46.8 min)
+  embedded 352/186,263 chunks (67/s, ETA 46.0 min)
+  embedded 672/186,263 chunks (63/s, ETA 48.7 min)
+  embedded 992/186,263 chunks (69/s, ETA 44.8 min)
+  embedded 1,312/186,263 chunks (73/s, ETA 42.3 min)
+  embedded 1,632/186,263 chunks (69/s, ETA 44.6 min)
+  embedded 1,952/186,263 chunks (67/s, ETA 45.5 min)
+  embedded 2,272/186,263 chunks (68/s, ETA 45.3 min)
+  embedded 2,592/186,263 chunks (67/s, ETA 45.9 min)
+  embedded 2,912/186,263 chunks (67/s, ETA 45.8 min)
+  embedded 3,232/186,263 chunks (66/s, ETA 46.1 min)
+  embedded 3,552/186,263 chunks (66/s, ETA 46.1 min)
+  embedded 3,872/186,263 chunks (67/s, ETA 45.6 min)
+  embedded 4,192/186,263 chunks (66/s, ETA 45.7 min)
+  embedded 4,512/186,263 chunks (66/s, ETA 45.8 min)
+  embedded 4,832/186,263 chunks (66/s, ETA 45.9 min)
+  embedded 5,152/186,263 chunks (66/s, ETA 45.9 min)
+  embedded 5,472/186,263 chunks (66/s, ETA 45.6 min)
+  embedded 5,792/186,263 chunks (66/s, ETA 45.2 min)
+  embedded 6,112/186,263 chunks (67/s, ETA 45.1 min)
+  embedded 6,432/186,263 chunks (67/s, ETA 45.0 min)
+  embedded 6,752/186,263 chunks (67/s, ETA 44.7 min)
+  embedded 7,072/186,263 chunks (67/s, ETA 44.5 min)
+  embedded 7,392/186,263 chunks (67/s, ETA 44.4 min)
+  embedded 7,712/186,263 chunks (67/s, ETA 44.4 min)
+  embedded 8,032/186,263 chunks (67/s, ETA 44.4 min)
+  embedded 8,352/186,263 chunks (67/s, ETA 44.3 min)
+  embedded 8,672/186,263 chunks (67/s, ETA 44.2 min)
+  embedded 8,992/186,263 chunks (67/s, ETA 44.1 min)
+  embedded 9,312/186,263 chunks (67/s, ETA 44.0 min)
+  embedded 9,632/186,263 chunks (67/s, ETA 44.0 min)
+  embedded 9,952/186,263 chunks (67/s, ETA 43.9 min)
+  embedded 10,272/186,263 chunks (67/s, ETA 43.9 min)
+  embedded 10,592/186,263 chunks (67/s, ETA 43.7 min)
+  embedded 10,912/186,263 chunks (67/s, ETA 43.7 min)
+  embedded 11,232/186,263 chunks (67/s, ETA 43.3 min)
+  embedded 11,552/186,263 chunks (67/s, ETA 43.2 min)
+  embedded 11,872/186,263 chunks (67/s, ETA 43.2 min)
+  embedded 12,192/186,263 chunks (67/s, ETA 43.2 min)
+  embedded 12,512/186,263 chunks (67/s, ETA 43.1 min)
+  embedded 12,832/186,263 chunks (67/s, ETA 42.8 min)
+  embedded 13,152/186,263 chunks (68/s, ETA 42.7 min)
+  embedded 13,472/186,263 chunks (68/s, ETA 42.5 min)
+  embedded 13,792/186,263 chunks (68/s, ETA 42.5 min)
+  embedded 14,112/186,263 chunks (68/s, ETA 42.4 min)
+  embedded 14,432/186,263 chunks (68/s, ETA 42.2 min)
+  embedded 14,752/186,263 chunks (68/s, ETA 42.1 min)
+  embedded 15,072/186,263 chunks (68/s, ETA 42.1 min)
+  embedded 15,392/186,263 chunks (68/s, ETA 41.9 min)
+  embedded 15,712/186,263 chunks (68/s, ETA 41.8 min)
+  embedded 16,032/186,263 chunks (68/s, ETA 41.7 min)
+  embedded 16,352/186,263 chunks (68/s, ETA 41.5 min)
+  embedded 16,672/186,263 chunks (68/s, ETA 41.4 min)
+  embedded 16,992/186,263 chunks (68/s, ETA 41.2 min)
+  embedded 17,312/186,263 chunks (69/s, ETA 41.1 min)
+  embedded 17,632/186,263 chunks (69/s, ETA 40.9 min)
+  embedded 17,952/186,263 chunks (69/s, ETA 40.8 min)
+  embedded 18,272/186,263 chunks (69/s, ETA 40.7 min)
+  embedded 18,592/186,263 chunks (69/s, ETA 40.6 min)
+  embedded 18,912/186,263 chunks (69/s, ETA 40.5 min)
+  embedded 19,232/186,263 chunks (69/s, ETA 40.4 min)
+  embedded 19,552/186,263 chunks (69/s, ETA 40.3 min)
+  embedded 19,872/186,263 chunks (69/s, ETA 40.3 min)
+  embedded 20,192/186,263 chunks (69/s, ETA 40.1 min)
+  embedded 20,512/186,263 chunks (69/s, ETA 40.1 min)
+  embedded 20,832/186,263 chunks (69/s, ETA 40.1 min)
+  embedded 21,152/186,263 chunks (69/s, ETA 40.0 min)
+  embedded 21,472/186,263 chunks (69/s, ETA 39.9 min)

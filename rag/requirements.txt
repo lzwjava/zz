@@ -1,0 +1,10 @@
+# Core
+sentence-transformers
+faiss-cpu
+numpy
+
+# Optional: grounded answer generation (llama.cpp backend, recommended on the 4070)
+llama-cpp-python
+
+# Optional: --backend vllm on large GPUs
+# vllm

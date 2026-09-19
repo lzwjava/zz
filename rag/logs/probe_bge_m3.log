@@ -1,0 +1,24 @@
+Model:      BAAI/bge-m3
+Output:     /tmp/rag_m3
+Chunking:   900 chars / 150 overlap
+
+Loading corpus...
+
+Total chunks: 652
+  by lang: en=652
+  avg chunk: 592 chars
+
+Loading encoder (BAAI/bge-m3)...
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights: 100%|██████████| 391/391 [00:00<00:00, 53302.98it/s]
+  dim=1024, device=cuda:0
+Embedding chunks...
+  embedded 32/652 chunks (66/s, ETA 0.2 min)
+  embedded 352/652 chunks (67/s, ETA 0.1 min)
+  embedded 652/652 chunks (63/s, ETA 0.0 min)
+  wrote embeddings.npy (652, 1024) float32
+  wrote index.faiss (652 vectors)
+  wrote chunks.jsonl (652 records)
+
+Done. Index in /tmp/rag_m3/
+  Search:  python search.py "your query"
+  Chat:    python rag_chat.py --question "your question"

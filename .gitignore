@@ -60,3 +60,10 @@ spgispeech/checkpoints/
 # Flux models and build artifacts
 flux/models/
 flux/sd_cpp/
+
+# RAG index and venv
+rag/rag_index/
+rag/.venv/
+rag/models/
+*.npy
+*.faiss
