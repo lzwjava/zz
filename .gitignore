@@ -63,6 +63,7 @@ flux/sd_cpp/
 
 # RAG index and venv
 rag/rag_index/
+rag/rag_index_e5/
 rag/.venv/
 rag/models/
 *.npy
