@@ -68,3 +68,5 @@ rag/.venv/
 rag/models/
 *.npy
 *.faiss
+# GPU benchmark binary
+gpu_bench
