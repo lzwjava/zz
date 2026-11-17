@@ -1,3 +1,9 @@
+<div align="center">
+<br />
+<img src="assets/zz.png" alt="ZZ logo" width="160">
+<br />
+</div>
+
 # ZZ
 
 A personal ML experimentation lab: dataset processing, LLM pretraining, SFT
